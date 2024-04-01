@@ -1,0 +1,23 @@
+<div class="container">
+    <form [formGroup]="userForm" (ngSubmit)="registerUser()">
+    <h1>Registro</h1>
+        <div class="input-container">
+            <label for="emailRegister">Correo:</label>
+            <input formControlName='email' type="email" id="emailRegister">
+        </div>
+        <div class="input-container">
+            <label for="usernameRegister">Nombre de usuario:</label>
+            <input formControlName='username' type="text" id="usernameRegister">
+        </div>
+        <div class="input-container">
+            <label for="passwordRegister">Contrase;a:</label>
+            <input formControlName="password" type="password" id="passwordRegister">
+        </div>
+        <button type="submit">registrar</button>
+    </form>
+    <div class="datos">
+        <p>{{usuario.Usuario}}</p>
+        <p>{{usuario.Pass}}</p>
+        <p>{{usuario.Correo}}</p>
+    </div> 
+</div>
