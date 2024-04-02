@@ -8,7 +8,7 @@ import { LoginComponent } from './components/login/login.component';
   standalone: true,
   imports: [CommonModule, RouterOutlet, RegisterComponent, LoginComponent],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrls:[ './components/bootstrap.css','./app.component.css']
 })
 export class AppComponent {
   title = 'front';

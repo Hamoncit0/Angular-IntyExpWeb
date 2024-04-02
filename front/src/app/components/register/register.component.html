@@ -1,23 +1,44 @@
-<div class="container">
-    <form [formGroup]="userForm" (ngSubmit)="registerUser()">
-    <h1>Registro</h1>
-        <div class="input-container">
-            <label for="emailRegister">Correo:</label>
-            <input formControlName='email' type="email" id="emailRegister">
+
+
+<div class="container card bg-secondary mb-3" style="max-width: 30rem;">
+        
+    <form class="formulario" [formGroup]="userForm" (ngSubmit)="registerUser()">
+        <h1 class="card-header">Registrate</h1>
+       
+        <div class="contenedor mb-3 card-body">
+        
+           <div class="input-contenedor mb-3">
+            <label for="floatingName" class="form-label mt-4">Nombre Completo</label>
+            
+            <input formControlName="username" type="nombre" class="form-control" id="floatingName" placeholder="Nombre">
+            
+           </div>
+            
+            <div class="input-contenedor mb-3">
+             <label for="floatingEmail" class="form-label mt-4">Correo Electronico</label>
+             <input formControlName="email" type="email" class="form-control" id="floatingEmail" placeholder="name@example.com">
+            </div>
+            
+            
+            <div class="input-contenedor mb-3" >
+             <label for="floatingPassword" class="form-label mt-4">Contraseña</label>
+             <input formControlName="password" type="password" class="form-control" id="floatingPassword" placeholder="Password">
+   
+           </div>
+   
+           <div class="input-contenedor mb-3">
+            <label for="FloatingDate" class="form-label mt-4">Fecha de Nacimiento</label>
+   
+            <input formControlName="birthday" type="date" class="form-control" id="FloatingDate" required
+               min="1925-01-01" max="2022-12-31">
+           </div>
+            
+            <input type="submit" value="Registrate" class="btn btn-primary">
+            <div class="undertext" style="margin-top: 5px;">
+                <p>¿Ya tienes una cuenta?<a class="link" routerLink="/login">Iniciar Sesion</a></p>
+            </div>
         </div>
-        <div class="input-container">
-            <label for="usernameRegister">Nombre de usuario:</label>
-            <input formControlName='username' type="text" id="usernameRegister">
-        </div>
-        <div class="input-container">
-            <label for="passwordRegister">Contrase;a:</label>
-            <input formControlName="password" type="password" id="passwordRegister">
-        </div>
-        <button type="submit">registrar</button>
-    </form>
-    <div class="datos">
-        <p>{{usuario.Usuario}}</p>
-        <p>{{usuario.Pass}}</p>
-        <p>{{usuario.Correo}}</p>
-    </div> 
+       </form>
 </div>
+
+<router-outlet></router-outlet>

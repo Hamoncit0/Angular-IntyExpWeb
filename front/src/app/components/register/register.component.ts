@@ -3,15 +3,16 @@ import { FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
 import { User } from '../../interfaces/user';
 import { UserService } from '../../service/user.service';
 import { HttpClientModule } from '@angular/common/http';
+import { RouterLink, RouterOutlet } from '@angular/router';
 
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [ReactiveFormsModule, HttpClientModule],
+  imports: [ReactiveFormsModule, HttpClientModule, RouterOutlet, RouterLink],
   providers:[UserService],
   templateUrl: './register.component.html',
-  styleUrl: './register.component.css'
+  styleUrls: ['../bootstrap.css', './register.component.css']
 })
 export class RegisterComponent {
   userForm: FormGroup;
@@ -20,6 +21,7 @@ export class RegisterComponent {
   //constructor para inicializar cositas
   constructor(private userService: UserService){
     this.userForm =  new FormGroup({
+      birthday: new FormControl(""),
       username: new FormControl(""),
       email: new FormControl(""),
       password: new FormControl("")
