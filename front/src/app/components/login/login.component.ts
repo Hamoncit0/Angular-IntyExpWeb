@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
   imports: [ReactiveFormsModule, HttpClientModule, RouterOutlet, RouterLink],
   providers:[UserService],
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css', '../bootstrap.css']
+  styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
 
