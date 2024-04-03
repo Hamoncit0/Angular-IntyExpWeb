@@ -1,0 +1,76 @@
+.barras{
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    width: 100%;
+}
+.barra1{
+    height: 60px;
+}
+.barra2{
+    height: 60px;
+}
+.searchbar{
+    width: 50vw;
+    max-width: 600px;
+}
+.content{
+    width: 100%;
+}
+.contenedor{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+.carrusel{
+    height: 60vh;
+    
+}
+.imagen-producto{
+    height: 250px;
+    width: 250px;
+}
+.todays-deals{
+    width: 100%;
+    margin: auto;
+    margin-top: 15px;
+    text-align: center;
+}
+.container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-content: stretch;
+    flex-wrap: wrap;
+}
+.flex-box{
+    height: fit-content;
+    margin: 15px;
+    width: 23%;
+    min-width: 320px;
+    padding: 10px 12px;
+    text-align: left;
+    justify-items: center;
+    border: 1px solid #cccc;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 20px 20px 30px rgba(0, 0, 0, 0.02);
+    transition: 0.2s ease;
+}
+.flex-box:hover{
+    box-shadow: 20px 20px 30px rgba(0,0,0,0.06);
+}
+.imagen-producto{
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+
+.btn{
+    margin: 3px;
+}
+.badge{
+    margin: 5px;
+    font-size: large;
+}

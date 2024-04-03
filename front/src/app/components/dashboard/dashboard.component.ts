@@ -6,7 +6,7 @@ import { RouterLink, RouterOutlet } from '@angular/router';
   standalone: true,
   imports: [RouterOutlet, RouterLink],
   templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.css', '../bootstrap.css']
+  styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent {
 
