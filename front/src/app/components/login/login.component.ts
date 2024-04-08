@@ -5,11 +5,12 @@ import { UserService } from '../../service/user.service';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterLink, RouterOutlet } from '@angular/router';
 import { Router } from '@angular/router';
+import { FooterComponent } from '../footer/footer.component';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [ReactiveFormsModule, HttpClientModule, RouterOutlet, RouterLink],
+  imports: [ReactiveFormsModule, HttpClientModule, RouterOutlet, RouterLink, FooterComponent],
   providers:[UserService],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']

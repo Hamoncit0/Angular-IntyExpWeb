@@ -4,13 +4,12 @@ import { User } from '../../interfaces/user';
 import { UserService } from '../../service/user.service';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterLink, RouterOutlet } from '@angular/router';
-import { NavBarComponent } from '../nav-bar/nav-bar.component';
-
+import { FooterComponent } from '../footer/footer.component';
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [ReactiveFormsModule, HttpClientModule, RouterOutlet, RouterLink],
+  imports: [ReactiveFormsModule, HttpClientModule, RouterOutlet, RouterLink, FooterComponent],
   providers:[UserService],
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']

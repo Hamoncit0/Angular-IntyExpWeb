@@ -1,3 +1,4 @@
+create database db_intyexpweb;
 use db_intyexpweb;
 select * from usuarios;
 CREATE TABLE Usuarios(

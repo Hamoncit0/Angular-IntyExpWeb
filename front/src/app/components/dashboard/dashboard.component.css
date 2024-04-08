@@ -24,8 +24,39 @@
     justify-content: space-evenly;
 }
 .carrusel{
-    height: 60vh;
-    
+    height: 65%;
+}
+.carousel-caption {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+  
+.carrusel-titulo{
+    font-size: 40px;
+    color: #ffffff;
+}
+
+
+.carrusel-subtitulo{
+    font-size: large;
+    color: #ffffff;
+}
+
+.btn-lg{
+    font-size: large;
+    font-weight: 500;
+}
+/* If the screen size is 600px or less, set the font-size of <div> to 30px */
+@media only screen and (max-width: 1400px) {
+  .carrusel-titulo {
+    font-size: 30px;
+  }
+  .carrusel-subtitulo {
+      font-size: 20px;
+    }
 }
 .imagen-producto{
     height: 250px;
@@ -66,7 +97,14 @@
     height: auto;
     border-radius: 5px;
 }
-
+.precio{
+    font-size: 20px;
+}
+.precio-desc{
+    font-size: 20px;
+    text-decoration: line-through;
+    color: #8e8e8ecc;
+}
 .btn{
     margin: 3px;
 }
