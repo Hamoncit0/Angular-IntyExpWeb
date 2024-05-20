@@ -9,13 +9,17 @@
      
          
         <div class="input-contenedor mb-3">
-         <label for="floatingInput" class="form-label">Nombre de Usuario</label>
-         <input formControlName='username' type="text" class="form-control" id="floatingInput" placeholder="name@example.com">
+         <label for="floatingInput" class="form-label">Correo Electrónico</label>
+         <input formControlName='email' type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
         </div>
          
         <div class="input-contenedor mb-3">
          <label for="floatingInput" class="form-label">Contraseña</label>           
          <input formControlName='password' type="password" class="form-control" placeholder="Contraseña">
+        </div>
+        <div *ngIf="errorMessage">
+            <small class="text-danger">{{ errorMessage }}</small>
+            <br>
         </div>
          <input type="submit" class="btn btn-primary" value="Login" >
         <div class="undertext" style="margin-top: 5px;">

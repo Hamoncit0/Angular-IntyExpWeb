@@ -1,70 +1,60 @@
-// Import required modules
 const express = require('express');
-const mysql = require('mysql'); // Using mysql2 package for MySQL connectivity
-const bodyParser = require('body-parser'); // Deprecated; consider using express.json() instead
+const mysql = require('mysql'); 
+const bodyParser = require('body-parser'); 
 const cors = require('cors')
-// Create Express app
-const app = express();
-const port = 3000; // Choose a port for your Express server
 
-// Middleware to parse JSON request bodies
+const app = express();
+const port = 3000; //Puerto para andar escuchando
+
+
 app.use(cors());
-app.use(bodyParser.json()); // Deprecated; consider using express.json() instead
-// MySQL database connection configuration
+app.use(bodyParser.json());//esto es para parsear las entidades
+
+//configuracion para conectarse a la base de datos
 const db = mysql.createConnection({
-  host: 'localhost', // Change this to your MySQL server host
-  user: 'root',      // Change this to your MySQL username
-  password: 'root',  // Change this to your MySQL password
-  database: 'db_intyexpweb' // Change this to your MySQL database name
+  host: 'localhost', 
+  user: 'root',      
+  password: 'root',  
+  database: 'db_intyexpweb' 
 });
 
-// Connect to MySQL database
+//Ya se conecta aqui
 db.connect((err) => {
   if (err) {
-    console.error('Error connecting to MySQL database:', err);
+    console.error('Error al conectarse a la base de datos de MySQL:', err);
     return;
   }
-  console.log('Connected to MySQL database');
+  console.log('Se conecto a la base de datos de MySQL');
 });
-  //CREATE
+  
   app.post('/users', (req, res) => {
   console.log("chi");
   const { Usuario, Correo, Pass } = req.body;
   db.query('INSERT INTO usuarios (Usuario, Correo, Pass) VALUES (?, ?, ?)', [Usuario, Correo, Pass], (err, result) => {
     if (err) {
-      console.error('Error inserting user:', err);
-      res.status(500).json({ error: 'Error inserting user' });
+      console.error('Error insertando el usuario:', err);
+      res.status(500).json({ error: 'Error insertando el usuario' });
       return;
     }
-    res.json({ message: 'User inserted successfully', id: result.insertId });
-  });
-});
-// READ
-app.get('/get-users', (req, res) => {
-  console.log("entro")
-  const {Usuario, Pass} = req.body;
-  db.query('SELECT * FROM usuarios', (err, results) => {
-    if (err) {
-      console.error('Error querying users:', err);
-      res.status(500).json({ error: 'Error querying users' });
-      return;
-    }
-    res.json(results);
+    res.json({ message: 'Usuario insertado correctamente', id: result.insertId });
   });
 });
 
+
+
 app.post('/login', (req, res) => {
-  console.log('entro');
-  const { Usuario, Pass } = req.body;
-  // Query the database to find a user with the provided username and password
-  db.query('SELECT * FROM usuarios WHERE Usuario = ? AND Pass = ?', [Usuario, Pass], (err, results) => {
+  console.log('entro a login');
+  const { Correo, Pass } = req.body;
+  
+  db.query('SELECT * FROM usuarios WHERE Correo = ? AND Pass = ?', [Correo, Pass], (err, results) => {
     if (err) {
       console.error('Error fetching user:', err);
-      res.status(500).json({ error: 'An error occurred while fetching user' });
+      res.status(500).json({ error: 'Un error ha ocurrido mientras se buscaba el usuario.' });
       return;
     }
     if (results.length === 0) {
-      res.status(404).json({ error: 'User not found' });
+      res.status(404).json({ error: 'Usuario no encontrado' });
+      console.log('no funciono :(' )
       return;
     }
     const user = results[0];
@@ -75,6 +65,6 @@ app.post('/login', (req, res) => {
 
   // Start the Express server
   app.listen(port, () => {
-    console.log(`Server is running on http://localhost:${port}`);
+    console.log(`El servidor esta corriendo en http://localhost:${port}`);
   });
   
