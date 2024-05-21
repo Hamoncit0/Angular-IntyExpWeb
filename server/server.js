@@ -62,6 +62,22 @@ app.post('/login', (req, res) => {
   });
 });
 
+app.get('/products', (req, res) => {
+  db.query('SELECT IdProducto, Nombre, Marca, Detalles, Precio, Imagen FROM Productos', (err, results) => {
+    if (err) {
+      console.error('Error fetching products:', err);
+      res.status(500).json({ error: 'Un error ha ocurrido mientras se buscaban los productos.' });
+      return;
+    }
+    results.forEach(product => {
+      if (product.Imagen) {
+        product.Imagen = `data:image/jpeg;base64,${Buffer.from(product.Imagen).toString('base64')}`;
+      }
+    });
+    res.status(200).json(results);
+  });
+});
+
 
   // Start the Express server
   app.listen(port, () => {

@@ -4,6 +4,6 @@ export interface Product{
     Marca: string;
     Detalles: string;
     Precio: number;
-    Imagen: ImageBitmap;
+    Imagen: string;
 
 }
