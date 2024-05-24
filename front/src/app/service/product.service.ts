@@ -27,4 +27,17 @@ export class ProductService {
     console.log(this.authService.currentUser);
     return this.http.post<Product[]>(`${this.url}/mostrarCarrito`, { UsuarioId });
   }
+  deleteProductFromCart(product: Product): Observable<any> {
+    const UsuarioId = this.authService.currentUser?.Id_Usu;
+    const ProductoId = product.IdProducto;
+    console.log("ID USUARIO AL ELIMINAR DEL CARRITO" + UsuarioId);
+    console.log(this.authService.currentUser);
+    return this.http.post<any>(`${this.url}/borrarProductoCarrito`, { ProductoId, UsuarioId });
+  }
+  updateCarrito(product: Product): Observable<any> {
+    const UsuarioId = this.authService.currentUser?.Id_Usu;
+    const ProductoId = product.IdProducto;
+    const Cantidad = product.Cantidad;
+    return this.http.post<any>(`${this.url}/modificarCarrito`, {ProductoId, UsuarioId, Cantidad});
+  }
 }

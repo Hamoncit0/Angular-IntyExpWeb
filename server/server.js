@@ -193,7 +193,7 @@ app.post('/agregarCarrito', (req, res) => {
 
 //modificar producto EXISTENTE al carrito
 app.post('/modificarCarrito', (req, res) => {
-  console.log("chi");
+  console.log("modificar cantidad de producto");
   const { ProductoId, UsuarioId, Cantidad } = req.body;
   db.query('UPDATE carrito SET Cantidad = ? WHERE IDUsu = ? AND IDProducto = ?;', [Cantidad, UsuarioId, ProductoId], (err, result) => {
     if (err) {

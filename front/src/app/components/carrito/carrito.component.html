@@ -6,37 +6,44 @@
             <th scope="row">Subtotal</th>
         </tr>
         <tr *ngFor="let producto of products">
-            <td >
+            <td>
                 <div class="flex-box">
                     <img [src]="producto.Imagen" class="imagen-producto" alt="{{ producto.Nombre }}">
-                <div class="description">
-                    
-                    <span>{{producto.Marca}}</span>
-                    <h4 class="nombre-producto">{{producto.Nombre}}</h4>
-                    <div class="opciones">
-                        <button class="btn-sm btn btn-outline-primary">Ver más</button>
-                        <a href="">Eliminar</a>
+                    <div class="description">
+                        <span>{{producto.Marca}}</span>
+                        <h4 class="nombre-producto">{{producto.Nombre}}</h4>
+                        <div class="opciones">
+                            <button class="btn-sm btn btn-outline-primary">Ver más</button>
+                            <a (click)="removeFromCart(producto)">Eliminar</a>
+                        </div>
                     </div>
                 </div>
-            </div>
             </td>
-            <td><input type="number" value="{{producto.Cantidad}}" class="form-control"></td>
             <td>
-                <!-- <span class="badge bg-success">50% de descuento</span> -->
-                <h5 class="precio">{{ producto.Precio | currency:"MXN" }}</h5>
-                <!-- <h5 class="precio-desc">$2,500.00 MXN</h5> -->
+                <div style="display: flex;">
+                    <label for="exampleSelect1" class="form-label mt-1">Cantidad</label>
+                    <select [value]="producto.Cantidad" class="form-select" id="exampleSelect1" [(ngModel)]="cantidadSeleccionada" (change)="updateCantidad(producto)">
+                      <option>1</option>
+                      <option>2</option>
+                      <option>3</option>
+                      <option>4</option>
+                      <option>5</option>
+                    </select>
+                </div>
+            <td>
+                <h5 class="precio">{{ producto.Precio * producto.Cantidad | currency:"MXN" }}</h5>
             </td>
         </tr>
         
         <tr>
             <td></td>
             <td></td>
-            <td> Subtotal $500.00 MXN</td>
+            <td> Subtotal: {{ calculateTotal() | currency:"MXN" }}</td>
         </tr>
     </table>
     <div class="proceder-pago">
         <h1>Pagar</h1>
-        <h4>Subtotal: $50000.00 MXN</h4>
+        <h4>Subtotal: {{ calculateTotal() | currency:"MXN" }}</h4>
         <button class="btn btn-primary" routerLink="/pago">Proceder a pago</button>
     </div>
 </div>
