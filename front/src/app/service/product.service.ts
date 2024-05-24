@@ -40,4 +40,9 @@ export class ProductService {
     const Cantidad = product.Cantidad;
     return this.http.post<any>(`${this.url}/modificarCarrito`, {ProductoId, UsuarioId, Cantidad});
   }
+  
+  emptyCart(): Observable<any> {
+    const UsuarioId = this.authService.currentUser?.Id_Usu;
+    return this.http.post<any>(`${this.url}/borrarCarrito`, {UsuarioId});
+  }
 }

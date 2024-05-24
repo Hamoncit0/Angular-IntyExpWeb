@@ -17,7 +17,6 @@ export class CarritoComponent implements OnInit{
   cantidadSeleccionada: number;
   constructor(private productService: ProductService){
     this.cantidadSeleccionada=0;
-    this.ngOnInit();
   }
 
   ngOnInit() {
@@ -51,12 +50,19 @@ export class CarritoComponent implements OnInit{
     this.productService.updateCarrito(producto).subscribe(response => {
       console.log('Producto updateado del carrito:', producto);
       this.ngOnInit();
-      // Aquí puedes mostrar algún mensaje de éxito o actualizar la UI si es necesario
     }, error => {
       console.error('Error al agregar al carrito:', error);
-      // Aquí puedes manejar el error, como mostrar un mensaje al usuario
     });
 
+  }
+  emptyCarrito(){
+    this.productService.emptyCart().subscribe(response => {
+      console.log('Carrito Vaciado');
+      this.ngOnInit();
+    }, error => {
+      console.error('Error al agregar al carrito:', error);
+      this.ngOnInit();
+    });
   }
   
 }

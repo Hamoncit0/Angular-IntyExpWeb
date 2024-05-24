@@ -174,7 +174,7 @@ app.post('/agregarCarrito', (req, res) => {
           res.json({ message: 'Cantidad del producto incrementada en el carrito' });
         });
       } else {
-        res.status(400).json({ message: 'No se puede agregar más de 6 unidades del mismo producto' });
+       //YA NO SE PUEDE AGREGAR NADOTA
       }
     } else {
       // Si no existe lo agrega
@@ -215,13 +215,13 @@ app.post('/borrarProductoCarrito', (req, res) => {
       res.status(500).json({ error: 'Error borrando productos del carrito' });
       return;
     }
-    res.json({ message: 'Producto del carrito borrado correctamente', id: result.insertId });
+    res.json({ message: 'Producto del carrito borrado correctamente'});
   });
 });
 
 //borrar Carrito del usuario
 app.post('/borrarCarrito', (req, res) => {
-  console.log("chi");
+  console.log("Vaciar carrito");
   const {UsuarioId} = req.body;
   db.query('Delete from carrito WHERE IDUsu = ?;', [UsuarioId], (err, result) => {
     if (err) {
@@ -229,7 +229,7 @@ app.post('/borrarCarrito', (req, res) => {
       res.status(500).json({ error: 'Error borrando el carrito' });
       return;
     }
-    res.json({ message: 'Producto del carrito borrado correctamente', id: result.insertId });
+    res.json({ message: 'Producto del carrito borrado correctamente' });
   });
 });
 
@@ -248,11 +248,6 @@ app.post('/mostrarCarrito', (req, res) => {
     if (err) {
       console.error('Error fetching user:', err);
       res.status(500).json({ error: 'Un error ha ocurrido mientras se buscaba el carrito.' });
-      return;
-    }
-    if (results.length === 0) {
-      res.status(404).json({ error: 'Carrito no encontrado' });
-      console.log('no funciono :(' )
       return;
     }
     results.forEach(product => {
