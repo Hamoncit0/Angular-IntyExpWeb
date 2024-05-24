@@ -1,0 +1,18 @@
+<div class="card mb-3" style="max-width: 540px;">
+    <div class="row g-0" *ngIf="producto">
+      <div class="col-md-4">
+        <img [src]="producto.Imagen" class="img-fluid rounded-start" alt="{{ producto.Nombre }}">
+      </div>
+      <div class="col-md-8">
+        <div class="card-body">
+          <h5 class="card-title">{{ producto.Nombre }}</h5>
+          <p class="card-text">{{ producto.Marca }}</p>
+          <p class="card-text"><small class="text-muted">{{ producto.Detalles }}</small></p>
+          <p class="card-text text-primary">{{ producto.Precio | currency: 'MXN' }}</p>
+          <button class="btn btn-primary">Comprar</button>
+          <button class="btn btn-outline-secondary">Agregar al carrito</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  

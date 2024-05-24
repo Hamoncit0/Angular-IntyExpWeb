@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { ProductService } from '../../service/product.service';
 import { Product } from '../../interfaces/product';
-
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-product-list',
@@ -15,7 +15,7 @@ import { Product } from '../../interfaces/product';
 export class ProductListComponent implements OnInit{
   products: Product[] = [];
 
-  constructor(private productService: ProductService) {}
+  constructor(private productService: ProductService, private router:Router) {}
 
   ngOnInit() {
     this.productService.getAllProducts().subscribe((data: Product[]) => {
@@ -30,10 +30,11 @@ export class ProductListComponent implements OnInit{
     console.log('Producto añadido al carrito:', product);
     this.productService.addToCart(product).subscribe(response => {
       console.log('Producto añadido al carrito:', product);
-      // Aquí puedes mostrar algún mensaje de éxito o actualizar la UI si es necesario
     }, error => {
       console.error('Error al agregar al carrito:', error);
-      // Aquí puedes manejar el error, como mostrar un mensaje al usuario
     });
+  }
+  verMas(product:Product){
+    this.router.navigate(['/producto', product.IdProducto]);
   }
 }

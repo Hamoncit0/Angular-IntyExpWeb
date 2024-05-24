@@ -84,6 +84,32 @@ app.get('/products', (req, res) => {
     res.status(200).json(results);
   });
 });
+//producto solo
+
+app.post('/productoSolo', (req, res) => {
+  const { ProductoId } = req.body;
+  console.log('entro a producto Solo con ID' + ProductoId);
+  
+  db.query('SELECT  IdProducto, Nombre, Marca, Detalles, Precio, Imagen FROM productos WHERE IdProducto = ?', [ProductoId], (err, results) => {
+    if (err) {
+      console.error('Error fetching user:', err);
+      res.status(500).json({ error: 'Un error ha ocurrido mientras se buscaba el usuario.' });
+      return;
+    }
+    if (results.length === 0) {
+      res.status(404).json({ error: 'Usuario no encontrado' });
+      console.log('no funciono :(' )
+      return;
+    }
+    results.forEach(product => {
+      if (product.Imagen) {
+        product.Imagen = `data:image/jpeg;base64,${Buffer.from(product.Imagen).toString('base64')}`;
+      }
+    });
+    const user = results[0];
+    res.status(200).json(user);
+  });
+});
 //MOSTRAR PRODUCTOS POR CATEGORIA
 app.post('/products/category', (req, res) => {
   console.log('entro a productos por categoria');
@@ -167,8 +193,8 @@ app.post('/agregarCarrito', (req, res) => {
       if (cantidadActual < 6) {
         db.query('UPDATE carrito SET Cantidad = Cantidad + 1 WHERE IdProducto = ? AND IdUsu = ?', [ProductoId, UsuarioId], (err, result) => {
           if (err) {
-            console.error('Error actualizando el carrito:', err);
-            res.status(500).json({ error: 'Error actualizando el carrito' });
+            console.error('Error updateando el carrito:', err);
+            res.status(500).json({ error: 'Error updateando el carrito' });
             return;
           }
           res.json({ message: 'Cantidad del producto incrementada en el carrito' });
@@ -229,7 +255,7 @@ app.post('/borrarCarrito', (req, res) => {
       res.status(500).json({ error: 'Error borrando el carrito' });
       return;
     }
-    res.json({ message: 'Producto del carrito borrado correctamente' });
+    res.json({ message: 'Carrito borrado correctamente' });
   });
 });
 
@@ -258,6 +284,10 @@ app.post('/mostrarCarrito', (req, res) => {
     res.status(200).json(results);
   });
 });
+
+//////////////PAGAR//////////////////
+
+
 
   // Start the Express server
   app.listen(port, () => {

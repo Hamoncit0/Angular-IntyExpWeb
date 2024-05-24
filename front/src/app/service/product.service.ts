@@ -13,6 +13,11 @@ export class ProductService {
   getAllProducts(): Observable<Product[]> {
     return this.http.get<Product[]>(`${this.url}/products`);
   }
+
+  getProduct(productoid: number): Observable<Product> {
+   const ProductoId = productoid;
+    return this.http.post<Product>(`${this.url}/productoSolo`, { ProductoId });
+  }
   
   addToCart(product: Product): Observable<any> {
     var UsuarioId =this.authService.currentUser?.Id_Usu;
@@ -44,5 +49,9 @@ export class ProductService {
   emptyCart(): Observable<any> {
     const UsuarioId = this.authService.currentUser?.Id_Usu;
     return this.http.post<any>(`${this.url}/borrarCarrito`, {UsuarioId});
+  }
+  comprar():Observable<any> {
+    const UsuarioId = this.authService.currentUser?.Id_Usu;
+    return this.http.post<any>(`${this.url}/pagar`, {UsuarioId})
   }
 }
