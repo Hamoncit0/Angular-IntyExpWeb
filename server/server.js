@@ -85,7 +85,7 @@ app.get('/products', (req, res) => {
   });
 });
 //MOSTRAR PRODUCTOS POR CATEGORIA
-app.post('/login', (req, res) => {
+app.post('/products/category', (req, res) => {
   console.log('entro a productos por categoria');
   const { CategoriaStr} = req.body;
   
@@ -107,7 +107,7 @@ app.post('/login', (req, res) => {
 
 //MOSTRAR PRODUCTOS POR Rango de precio
 
-app.post('/login', (req, res) => {
+app.post('/products/price-range', (req, res) => {
   console.log('entro a productos por categoria');
   const { PrecioMin, PrecioMax} = req.body;
   
@@ -133,8 +133,8 @@ app.post('/login', (req, res) => {
 //agregar producto NUEVO al carrito
 app.post('/agregarCarrito', (req, res) => {
   console.log("Entro a Agregar Carrito Nuevo");
-  const { ProductoId, UsuarioId, Cantidad } = req.body;
-  db.query('INSERT INTO carrito (IdProducto, IdUsuario, Cantidad) VALUES (?, ?, ?)', [ProductoId, UsuarioId, Cantidad], (err, result) => {
+  const { ProductoId, UsuarioId} = req.body;
+  db.query('INSERT INTO carrito (IdProducto, IdUsu, Cantidad) VALUES (?, ?, 1)', [ProductoId, UsuarioId], (err, result) => {
     if (err) {
       console.error('Error insertando el usuario:', err);
       res.status(500).json({ error: 'Error insertando el usuario' });

@@ -28,5 +28,12 @@ export class ProductListComponent implements OnInit{
   addToCart(product: Product) {
     // Aquí va la lógica para agregar al carrito UwU
     console.log('Producto añadido al carrito:', product);
+    this.productService.addToCart(product).subscribe(response => {
+      console.log('Producto añadido al carrito:', product);
+      // Aquí puedes mostrar algún mensaje de éxito o actualizar la UI si es necesario
+    }, error => {
+      console.error('Error al agregar al carrito:', error);
+      // Aquí puedes manejar el error, como mostrar un mensaje al usuario
+    });
   }
 }
