@@ -8,6 +8,7 @@ import { CarritoComponent } from './components/carrito/carrito.component';
 import { PagoComponent } from './components/pago/pago.component';
 import { PagoExitosoComponent } from './components/pago-exitoso/pago-exitoso.component';
 import { VerProductoComponent } from './components/ver-producto/ver-producto.component';
+import { ProductosFiltrosComponent } from './components/productos-filtros/productos-filtros.component';
 export const routes: Routes = [
     {path:'', component:DashboardComponent},
     {path:'register', component:RegisterComponent},
@@ -16,5 +17,6 @@ export const routes: Routes = [
     {path:'carrito', component:CarritoComponent},
     {path:'pago', component:PagoComponent},
     {path:'pago-exitoso', component:PagoExitosoComponent},
-    {path: 'producto/:id', component: VerProductoComponent }
+    {path: 'producto/:id', component: VerProductoComponent },
+    {path: 'productosFiltros', component: ProductosFiltrosComponent}
 ];

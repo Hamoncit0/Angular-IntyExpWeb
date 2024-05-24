@@ -1,0 +1,41 @@
+<div class="container">
+    <div class="row">
+      <!-- Sidebar for categories and filters -->
+      <div class="col-md-3">
+        <!-- Categories -->
+        <div class="list-group">
+          <h5 class="list-group-item list-group-item-action active">Categorías</h5>
+          <button *ngFor="let categoria of categorias" class="list-group-item list-group-item-action" (click)="selectCategory(categoria)">
+            {{ categoria.Categoria }}
+          </button>
+        </div>
+  
+        <!-- Price Range Filter -->
+        <div class="mt-4">
+          <h5>Rango de Precio</h5>
+          <div class="form-group">
+            <label for="priceRange">Precio: {{ precioMin }} - {{ precioMax }}</label>
+            <input type="range" class="form-range" id="priceRange" min="0" max="10000" [(ngModel)]="precioMax" (change)="filterByPrice()">
+          </div>
+        </div>
+      </div>
+  
+      <!-- Main content for products -->
+      <div class="col-md-9">
+        <div class="row">
+          <div *ngFor="let producto of productosFiltrados" class="col-md-4 mb-4">
+            <div class="card">
+              <img [src]="producto.Imagen" class="card-img-top" alt="{{ producto.Nombre }}">
+              <div class="card-body">
+                <h5 class="card-title">{{ producto.Nombre }}</h5>
+                <p class="card-text">{{ producto.Marca }}</p>
+                <p class="card-text">{{ producto.Precio | currency:'MXN' }}</p>
+                <a [routerLink]="['/producto', producto.IdProducto]" class="btn btn-primary">Ver más</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

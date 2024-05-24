@@ -7,5 +7,6 @@ export interface Product{
     Imagen: string;
     Cantidad:number;
     Id_Usu: number;
+    IdCategoria:number;
 
 }

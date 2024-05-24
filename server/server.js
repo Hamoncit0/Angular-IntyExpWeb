@@ -43,8 +43,6 @@ db.connect((err) => {
   });
 });
 
-
-
 app.post('/login', (req, res) => {
   console.log('entro a login');
   const { Correo, Pass } = req.body;
@@ -64,7 +62,6 @@ app.post('/login', (req, res) => {
     res.status(200).json(user);
   });
 });
-
 
 /////////////////PRODUCTOS////////////////////////////
 //agarrar los productos para poder verlos en pantalla (todos)
@@ -131,49 +128,7 @@ app.post('/products/category', (req, res) => {
   });
 });
 
-//MOSTRAR PRODUCTOS POR Rango de precio
-
-app.post('/products/price-range', (req, res) => {
-  console.log('entro a productos por categoria');
-  const { PrecioMin, PrecioMax} = req.body;
-  
-  db.query('SELECT procat.IdProducto, procat.IdCategoria, cat.Categoria, pro.Nombre, pro.Marca, pro.Detalles, pro.Precio, pro.Imagen  FROM productocategorias procat JOIN productos pro ON procat.IdProducto = pro.IdProducto JOIN categorias cat ON procat.IdCategoria = cat.IdCategoria WHERE pro.Precio>=? AND pro.Precio<=?;', [PrecioMin, PrecioMax], (err, results) => {
-    if (err) {
-      console.error('Error fetching user:', err);
-      res.status(500).json({ error: 'Un error ha ocurrido mientras se buscaba el producto.' });
-      return;
-    }
-    if (results.length === 0) {
-      res.status(404).json({ error: 'Producto no encontrado' });
-      console.log('no funciono :(' )
-      return;
-    }
-    const user = results[0];
-    res.status(200).json(user);
-  });
-});
-
 //////////////////CARRITO//////////////////////////
-
-/* 
-//agregar producto NUEVO al carrito
-app.post('/agregarCarrito', (req, res) => {
-  console.log("Entro a Agregar Carrito Nuevo");
-  const { ProductoId, UsuarioId} = req.body;
-
-  //checar si ya esta agregado
-  
-
-  db.query('INSERT INTO carrito (IdProducto, IdUsu, Cantidad) VALUES (?, ?, 1)', [ProductoId, UsuarioId], (err, result) => {
-    if (err) {
-      console.error('Error insertando el usuario:', err);
-      res.status(500).json({ error: 'Error insertando el usuario' });
-      return;
-    }
-    res.json({ message: 'Producto insertado correctamente al carrito', id: result.insertId });
-  });
-}); */
-
 
 app.post('/agregarCarrito', (req, res) => {
   console.log("Entro a Agregar Carrito Nuevo");
@@ -215,7 +170,6 @@ app.post('/agregarCarrito', (req, res) => {
     }
   });
 });
-
 
 //modificar producto EXISTENTE al carrito
 app.post('/modificarCarrito', (req, res) => {
@@ -285,7 +239,7 @@ app.post('/mostrarCarrito', (req, res) => {
   });
 });
 
-//////////////PAGAR//////////////////
+//////////////CATEGORIAS//////////////////
 
 
 
