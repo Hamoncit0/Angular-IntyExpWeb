@@ -12,16 +12,18 @@
               <!-- Categorías hijas -->
               <div class="ml-3" *ngFor="let categoriaHija of categoriasHijas" [ngClass]="'category-' + categoria.IdCategoria" style="display: none;">
                 <div *ngIf="categoria.IdCategoria == categoriaHija.IdCatParent">
-                  <input type="checkbox" [value]="categoriaHija.IdCategoria">{{ categoriaHija.Categoria }}
+                  <input type="checkbox" [value]="categoriaHija.IdCategoria"(click)="selectCategoryHija(categoriaHija)" >{{ categoriaHija.Categoria }}
                 </div>
-              </div>
-              <!-- Categorías nietas -->
-              <div class="ml-5" *ngFor="let categoriaNietas of categoriasNietas" [ngClass]="'category-' + categoria.IdCategoria" style="display: none;">
-                <input type="checkbox" [value]="categoriaNietas.IdCategoria">{{ categoriaNietas.Categoria }}
               </div>
             </div>
           </div>
           
+         <!-- Categorías nietas -->
+         <div #categoryList class="ml-5" *ngFor="let categoriaNietas of categoriasNietas" [ngClass]="'category-' + categoriaNietas.IdCatParent" style="display: none;">
+           <div *ngIf="selectedCategoryHija?.IdCategoria == categoriaNietas.IdCatParent">
+           <input type="checkbox" [value]="categoriaNietas.IdCategoria">{{ categoriaNietas.Categoria }}
+           </div>
+         </div>
   
         <!-- Price Range Filter -->
         <div class="mt-4">

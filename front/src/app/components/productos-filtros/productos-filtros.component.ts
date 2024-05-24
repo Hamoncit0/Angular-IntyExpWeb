@@ -33,7 +33,8 @@ export class ProductosFiltrosComponent {
   //categoria seleccionada
   selectedCategory: Category | null = null;
   categoriasActivas: Category[] = [];
-
+  selectedCategoryHija:Category | null =null;
+  selectedCategoryNieta:Category[] = [];
   @ViewChild('categoryList') categoryList: ElementRef | undefined;
 
   constructor(private productService: ProductService, private categoryService: CategoryService) {}
@@ -80,6 +81,13 @@ export class ProductosFiltrosComponent {
      this.toggleCategories(categoria.IdCategoria);
   }
 
+  selectCategoryHija(categoria:Category){
+    
+    this.selectedCategoryHija = categoria;
+    console.log(this.selectedCategoryHija);
+    this.filterProducts();
+    this.toggleCategories(categoria.IdCategoria);
+  }
 
   filterProducts(): void {
     let filtered = this.productos;
