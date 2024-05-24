@@ -129,11 +129,15 @@ app.post('/products/price-range', (req, res) => {
 
 //////////////////CARRITO//////////////////////////
 
-
+/* 
 //agregar producto NUEVO al carrito
 app.post('/agregarCarrito', (req, res) => {
   console.log("Entro a Agregar Carrito Nuevo");
   const { ProductoId, UsuarioId} = req.body;
+
+  //checar si ya esta agregado
+  
+
   db.query('INSERT INTO carrito (IdProducto, IdUsu, Cantidad) VALUES (?, ?, 1)', [ProductoId, UsuarioId], (err, result) => {
     if (err) {
       console.error('Error insertando el usuario:', err);
@@ -142,7 +146,51 @@ app.post('/agregarCarrito', (req, res) => {
     }
     res.json({ message: 'Producto insertado correctamente al carrito', id: result.insertId });
   });
+}); */
+
+
+app.post('/agregarCarrito', (req, res) => {
+  console.log("Entro a Agregar Carrito Nuevo");
+  const { ProductoId, UsuarioId } = req.body;
+
+  // Checar si el usuario ya tiene el producto en su carrito
+  db.query('SELECT * FROM carrito WHERE IdProducto = ? AND IdUsu = ?', [ProductoId, UsuarioId], (err, results) => {
+    if (err) {
+      console.error('Error verificando el carrito:', err);
+      res.status(500).json({ error: 'Error verificando el carrito' });
+      return;
+    }
+
+    if (results.length > 0) {
+      // Si ya existe solo le agrega 1 mas
+      const cantidadActual = results[0].Cantidad;
+      if (cantidadActual < 6) {
+        db.query('UPDATE carrito SET Cantidad = Cantidad + 1 WHERE IdProducto = ? AND IdUsu = ?', [ProductoId, UsuarioId], (err, result) => {
+          if (err) {
+            console.error('Error actualizando el carrito:', err);
+            res.status(500).json({ error: 'Error actualizando el carrito' });
+            return;
+          }
+          res.json({ message: 'Cantidad del producto incrementada en el carrito' });
+        });
+      } else {
+        res.status(400).json({ message: 'No se puede agregar más de 6 unidades del mismo producto' });
+      }
+    } else {
+      // Si no existe lo agrega
+      db.query('INSERT INTO carrito (IdProducto, IdUsu, Cantidad) VALUES (?, ?, 1)', [ProductoId, UsuarioId], (err, result) => {
+        if (err) {
+          console.error('Error insertando el producto en el carrito:', err);
+          res.status(500).json({ error: 'Error insertando el producto en el carrito' });
+          return;
+        }
+        res.json({ message: 'Producto insertado correctamente al carrito', id: result.insertId });
+      });
+    }
+  });
 });
+
+
 //modificar producto EXISTENTE al carrito
 app.post('/modificarCarrito', (req, res) => {
   console.log("chi");
