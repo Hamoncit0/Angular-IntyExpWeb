@@ -6,6 +6,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { RouterLink, RouterOutlet } from '@angular/router';
 import { FooterComponent } from '../footer/footer.component';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-register',
   standalone: true,
@@ -17,9 +18,9 @@ import { CommonModule } from '@angular/common';
 export class RegisterComponent {
   userForm: FormGroup;
   usuario: User = {Correo:'', Pass:'', Nombres:'', Apellidos:''}
-
+  mensajeChi: String = "";
   //constructor para inicializar cositas
-  constructor(private userService: UserService){
+  constructor(private userService: UserService, private router:Router){
     this.userForm =  new FormGroup({
       birthday: new FormControl("", Validators.required),
       firstName: new FormControl("", [Validators.required, Validators.minLength(5), Validators.maxLength(20)]),
@@ -55,11 +56,11 @@ export class RegisterComponent {
       this.userService.addUser(user).subscribe(
         (response) => {
           console.log('POST request successful:', response);
-          // Handle response if needed
+          this.mensajeChi = "Registro completado correctamente."
+          this.userForm.reset(); //borrar datos del form
         },
         (error) => {
           console.error('Error making POST request:', error);
-          // Handle error if needed
         }
       );
 

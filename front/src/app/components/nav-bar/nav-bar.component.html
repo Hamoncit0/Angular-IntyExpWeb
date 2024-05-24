@@ -14,18 +14,21 @@
           <div class="list">
 
               <ul class="navbar-nav me-auto">
-                  <li class="nav-item">
+                  <li class="nav-item" *ngIf="authService.currentUser">
                       <a class="nav-link">Tus Pedidos</a>
                   </li>
-                  <li class="nav-item">
+                  <li class="nav-item" *ngIf="authService.currentUser">
                       <a class="nav-link" routerLink="/carrito">Carrito</a>
                   </li>
-                  <li class="nav-item">
-                      <a class="nav-link" routerLink="/login">Log In</a>
+                  <li class="nav-item" *ngIf="!authService.currentUser">
+                      <a class="nav-link" routerLink="/login">Iniciar Sesion</a>
                   </li>
-                  <li class="nav-item">
-                      <a class="nav-link" routerLink="/register">Sign Up</a>
+                  <li class="nav-item" *ngIf="!authService.currentUser">
+                      <a class="nav-link" routerLink="/register">Registrarse</a>
                   </li>
+                  <li class="nav-item" *ngIf="authService.currentUser">
+                    <a class="nav-link" routerLink="/dashboard" (click)="logout()">Cerrar Sesión</a>
+                </li>
               </ul>
           </div>
         </div>

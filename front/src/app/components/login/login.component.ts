@@ -7,6 +7,8 @@ import { RouterLink, RouterOutlet } from '@angular/router';
 import { Router } from '@angular/router';
 import { FooterComponent } from '../footer/footer.component';
 import { CommonModule } from '@angular/common';
+import { AutenticacionService } from '../../service/autenticacion.service';
+
 @Component({
   selector: 'app-login',
   standalone: true,
@@ -21,7 +23,7 @@ export class LoginComponent {
   usuario: User = {Correo:'', Pass:'', Nombres:'', Apellidos:''}
   errorMessage: string = '';
   //constructor para inicializar cositas
-  constructor(private userService: UserService, private router:Router){
+  constructor(private userService: UserService, private router:Router, private authService: AutenticacionService){
     this.logInForm =  new FormGroup({
       email: new FormControl(""),
       password: new FormControl("")
@@ -44,6 +46,7 @@ export class LoginComponent {
         if(userLogIn!=null){
           this.usuario = userLogIn;
           console.log(this.usuario);
+          this.authService.login(userLogIn);
           this.router.navigate(['/dashboard']);
           this.errorMessage = '';
         }
