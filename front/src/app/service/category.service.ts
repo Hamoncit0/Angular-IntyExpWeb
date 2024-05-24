@@ -10,7 +10,15 @@ export class CategoryService {
   private url = 'http://localhost:3000'
   constructor(private http: HttpClient) {}
 
-  getCategories(): Observable<Category[]> {
-     return this.http.get<Category[]>(`${this.url}/productoSolo`);
+  getCategorias(): Observable<Category[]> {
+     return this.http.get<Category[]>(`${this.url}/categoriasPadre`);
    }
+   
+  getCategoriasHijas(): Observable<Category[]> {
+    return this.http.get<Category[]>(`${this.url}/categoriasHijas`);
+  }
+  
+  getCategoriasNietas(): Observable<Category[]> {
+    return this.http.get<Category[]>(`${this.url}/categoriasNietas`);
+  }
 }

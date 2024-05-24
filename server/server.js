@@ -107,12 +107,12 @@ app.post('/productoSolo', (req, res) => {
     res.status(200).json(user);
   });
 });
+
 //MOSTRAR PRODUCTOS POR CATEGORIA
-app.post('/products/category', (req, res) => {
+app.get('/products/category', (req, res) => {
   console.log('entro a productos por categoria');
-  const { CategoriaStr} = req.body;
   
-  db.query('SELECT procat.IdProducto, procat.IdCategoria, cat.Categoria, pro.Nombre, pro.Marca, pro.Detalles, pro.Precio, pro.Imagen  FROM productocategorias procat JOIN productos pro ON procat.IdProducto = pro.IdProducto JOIN categorias cat ON procat.IdCategoria = cat.IdCategoria WHERE cat.Categoria = "?";', [CategoriaStr], (err, results) => {
+  db.query('SELECT procat.IdProducto, procat.IdCategoria, cat.Categoria, pro.Nombre, pro.Marca, pro.Detalles, pro.Precio, pro.Imagen  FROM productocategorias procat JOIN productos pro ON procat.IdProducto = pro.IdProducto JOIN categorias cat ON procat.IdCategoria = cat.IdCategoria;', (err, results) => {
     if (err) {
       console.error('Error fetching user:', err);
       res.status(500).json({ error: 'Un error ha ocurrido mientras se buscaba el producto.' });
@@ -123,8 +123,12 @@ app.post('/products/category', (req, res) => {
       console.log('no funciono :(' )
       return;
     }
-    const user = results[0];
-    res.status(200).json(user);
+    results.forEach(product => {
+      if (product.Imagen) {
+        product.Imagen = `data:image/jpeg;base64,${Buffer.from(product.Imagen).toString('base64')}`;
+      }
+    });
+    res.status(200).json(results);
   });
 });
 
@@ -240,6 +244,43 @@ app.post('/mostrarCarrito', (req, res) => {
 });
 
 //////////////CATEGORIAS//////////////////
+//TODAS LAS CATEGORIAS SIN PADRE
+app.get('/categoriasPadre', (req, res) => {
+  console.log('entro a recoger categorias');
+  db.query('SELECT * FROM categorias WHERE IdCatParent IS NULL;', (err, results) => {
+    if (err) {
+      console.error('Error fetching products:', err);
+      res.status(500).json({ error: 'Un error ha ocurrido mientras se buscaban las primeras categorias.' });
+      return;
+    }
+    res.status(200).json(results);
+  });
+});
+
+
+app.get('/categoriasHijas', (req, res) => {
+  console.log('entro a recoger categorias');
+  db.query('SELECT hijas.* FROM categorias hijas JOIN categorias padre ON hijas.IdCatParent = padre.IdCategoria WHERE padre.IdCatParent IS NULL;', (err, results) => {
+    if (err) {
+      console.error('Error fetching products:', err);
+      res.status(500).json({ error: 'Un error ha ocurrido mientras se buscaban las primeras categorias.' });
+      return;
+    }
+    res.status(200).json(results);
+  });
+});
+
+app.get('/categoriasNietas', (req, res) => {
+  console.log('entro a recoger categorias');
+  db.query('SELECT nietas.* FROM categorias padre JOIN categorias hijas ON padre.IdCategoria = hijas.IdCatParent JOIN categorias nietas ON hijas.IdCategoria = nietas.IdCatParent WHERE nietas.IdCatParent IS NOT NULL;', (err, results) => {
+    if (err) {
+      console.error('Error fetching products:', err);
+      res.status(500).json({ error: 'Un error ha ocurrido mientras se buscaban las primeras categorias.' });
+      return;
+    }
+    res.status(200).json(results);
+  });
+});
 
 
 

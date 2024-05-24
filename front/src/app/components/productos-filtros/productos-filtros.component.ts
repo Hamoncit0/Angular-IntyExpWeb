@@ -16,6 +16,8 @@ import { FormsModule } from '@angular/forms';
 export class ProductosFiltrosComponent {
   productos: Product[] = [];
   categorias: Category[] = [];
+  categoriasHijas: Category[] = [];
+  categoriasNietas: Category[] = [];
   productosFiltrados: Product[] = [];
   precioMin: number = 0;
   precioMax: number = 10000;
@@ -28,8 +30,18 @@ export class ProductosFiltrosComponent {
   }
 
   loadCategories(): void {
-    this.categoryService.getCategories().subscribe((data: Category[]) => {
+    this.categoryService.getCategorias().subscribe((data: Category[]) => {
       this.categorias = data;
+    });
+  }
+  loadCategoriesHijas(): void {
+    this.categoryService.getCategoriasHijas().subscribe((data: Category[]) => {
+      this.categoriasHijas = data;
+    });
+  }
+  loadCategoriesNietas(): void {
+    this.categoryService.getCategoriasNietas().subscribe((data: Category[]) => {
+      this.categoriasNietas = data;
     });
   }
 
