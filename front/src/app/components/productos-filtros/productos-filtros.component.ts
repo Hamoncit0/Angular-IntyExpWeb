@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ProductService } from '../../service/product.service';
 import { CategoryService } from '../../service/category.service';
 import { Product } from '../../interfaces/product';
@@ -6,6 +6,8 @@ import { Category } from '../../interfaces/category';
 import { RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import $ from 'jquery'; 
+
 @Component({
   selector: 'app-productos-filtros',
   standalone: true,
@@ -31,6 +33,9 @@ export class ProductosFiltrosComponent {
   //categoria seleccionada
   selectedCategory: Category | null = null;
   categoriasActivas: Category[] = [];
+
+  @ViewChild('categoryList') categoryList: ElementRef | undefined;
+
   constructor(private productService: ProductService, private categoryService: CategoryService) {}
 
   ngOnInit(): void {
@@ -67,8 +72,12 @@ export class ProductosFiltrosComponent {
     return this.selectedCategory;
   }
   selectCategory(categoria:Category){
+    
     this.selectedCategory = categoria;
+    console.log(this.selectedCategory);
     this.filterProducts();
+     // Expandir o contraer las categorías hijas y nietas
+     this.toggleCategories(categoria.IdCategoria);
   }
 
 
@@ -104,7 +113,6 @@ export class ProductosFiltrosComponent {
     for (let i = 0; i < this.categorias.length; i++) {
       if (this.categorias[i].IdCategoria === selectedCategoryId) {
         this.categoriasActivas.push(this.categorias[i]);
-        console.log(this.categorias[i].IdCategoria);
       }
     }
   
@@ -112,7 +120,6 @@ export class ProductosFiltrosComponent {
     for (let j = 0; j < this.categoriasHijas.length; j++) {
       if (this.categoriasHijas[j].IdCatParent === selectedCategoryId) {
         this.categoriasActivas.push(this.categoriasHijas[j]);
-        console.log(this.categoriasHijas[j].IdCategoria);
       }
     }
   
@@ -149,4 +156,10 @@ export class ProductosFiltrosComponent {
         break;
     }
   }
+  toggleCategories(selectedCategoryId: number): void {
+    $(this.categoryList?.nativeElement).find('.category-' + selectedCategoryId).toggle();
+  }
+
+
+
 }
