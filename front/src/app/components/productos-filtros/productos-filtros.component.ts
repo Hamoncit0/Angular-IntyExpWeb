@@ -14,18 +14,29 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './productos-filtros.component.css'
 })
 export class ProductosFiltrosComponent {
+  //lista original de productos
   productos: Product[] = [];
+  //lista de categorias
   categorias: Category[] = [];
   categoriasHijas: Category[] = [];
   categoriasNietas: Category[] = [];
+  //productos filtrados
   productosFiltrados: Product[] = [];
+
+  //campos para filtrar
   precioMin: number = 0;
   precioMax: number = 10000;
+  sortOrder: string = 'alphaAsc';
 
+  //categoria seleccionada
+  selectedCategory: Category | null = null;
+  categoriasActivas: Category[] = [];
   constructor(private productService: ProductService, private categoryService: CategoryService) {}
 
   ngOnInit(): void {
     this.loadCategories();
+    this.loadCategoriesHijas();
+    this.loadCategoriesNietas();
     this.loadProducts();
   }
 
@@ -52,11 +63,90 @@ export class ProductosFiltrosComponent {
     });
   }
 
-  selectCategory(categoria: Category): void {
-    this.productosFiltrados = this.productos.filter(producto => producto.IdCategoria === categoria.IdCategoria);
+  getSelectedCategories(){
+    return this.selectedCategory;
+  }
+  selectCategory(categoria:Category){
+    this.selectedCategory = categoria;
+    this.filterProducts();
   }
 
-  filterByPrice(): void {
-    this.productosFiltrados = this.productos.filter(producto => producto.Precio >= this.precioMin && producto.Precio <= this.precioMax);
+
+  filterProducts(): void {
+    let filtered = this.productos;
+  
+    // Filter by selected categories
+    if (this.selectedCategory) {
+      const selectedCategoryId = this.selectedCategory.IdCategoria;
+  
+      // Activar categorías seleccionadas
+      this.activarCategoriasSeleccionadas(selectedCategoryId);
+  
+      // Filtrar productos que pertenecen a las categorías activas 
+      filtered = filtered.filter(producto => 
+        this.categoriasActivas.some(categoria => categoria.IdCategoria === producto.IdCategoria)
+       );
+    }
+  
+    // Filter by price range
+    filtered = filtered.filter(producto => producto.Precio >= this.precioMin && producto.Precio <= this.precioMax);
+  
+    this.productosFiltrados = filtered;
+    this.sortProducts();
+  }
+  
+  
+  // Función para verificar si una categoría o una de sus subcategorías coincide con una categoría seleccionada
+  activarCategoriasSeleccionadas(selectedCategoryId: number) {
+    this.categoriasActivas = [];
+  
+    // Agregar categoría padre seleccionada
+    for (let i = 0; i < this.categorias.length; i++) {
+      if (this.categorias[i].IdCategoria === selectedCategoryId) {
+        this.categoriasActivas.push(this.categorias[i]);
+        console.log(this.categorias[i].IdCategoria);
+      }
+    }
+  
+    // Agregar categorías hijas de la categoría seleccionada
+    for (let j = 0; j < this.categoriasHijas.length; j++) {
+      if (this.categoriasHijas[j].IdCatParent === selectedCategoryId) {
+        this.categoriasActivas.push(this.categoriasHijas[j]);
+        console.log(this.categoriasHijas[j].IdCategoria);
+      }
+    }
+  
+    // Agregar categorías nietas de las categorías hijas
+    for (let j = 0; j < this.categoriasHijas.length; j++) {
+      if (this.categoriasHijas[j].IdCatParent === selectedCategoryId) {
+        for (let k = 0; k < this.categoriasNietas.length; k++) {
+          if (this.categoriasNietas[k].IdCatParent === this.categoriasHijas[j].IdCategoria) {
+            this.categoriasActivas.push(this.categoriasNietas[k]);
+          }
+        }
+      }
+    }
+  
+    return this.categoriasActivas;
+  }
+  
+  
+
+
+  sortProducts(): void {
+    switch (this.sortOrder) {
+      case 'alphaAsc':
+        this.productosFiltrados.sort((a, b) => a.Nombre.localeCompare(b.Nombre));
+        break;
+      case 'alphaDesc':
+        this.productosFiltrados.sort((a, b) => b.Nombre.localeCompare(a.Nombre));
+        break;
+      case 'priceAsc':
+        this.productosFiltrados.sort((a, b) => a.Precio - b.Precio);
+        break;
+      case 'priceDesc':
+        this.productosFiltrados.sort((a, b) => b.Precio - a.Precio);
+        break;
+    }
   }
 }
