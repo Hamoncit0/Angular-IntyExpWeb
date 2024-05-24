@@ -5,5 +5,7 @@ export interface Product{
     Detalles: string;
     Precio: number;
     Imagen: string;
+    Cantidad?:number;
+    Id_Usu?: number;
 
 }

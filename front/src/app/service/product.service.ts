@@ -21,4 +21,10 @@ export class ProductService {
     console.log(this.authService.currentUser);
     return this.http.post<any>(`${this.url}/agregarCarrito`, { ProductoId, UsuarioId });
   }
+  getCart(): Observable<Product[]> {
+    const UsuarioId = this.authService.currentUser?.Id_Usu;
+    console.log("ID USUARIO AL OBTENER CARRITO" + UsuarioId);
+    console.log(this.authService.currentUser);
+    return this.http.post<Product[]>(`${this.url}/mostrarCarrito`, { UsuarioId });
+  }
 }

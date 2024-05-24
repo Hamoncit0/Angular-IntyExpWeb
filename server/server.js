@@ -236,10 +236,15 @@ app.post('/borrarCarrito', (req, res) => {
 //mostrar productos EXISTENTES del carrito
 
 app.post('/mostrarCarrito', (req, res) => {
-  console.log('entro a login');
-  const { ProductoId, UsuarioId } = req.body;
-  
-  db.query('SELECT car.Cantidad, pro.* FROM Carrito car JOIN Productos pro ON car.IDProducto = pro.IdProducto WHERE car.IDUsu = ? AND car.IDProducto =?;', [UsuarioId, ProductoId], (err, results) => {
+  console.log('entro a carrito mostrar');
+  const UsuarioId = req.body.UsuarioId;
+  if (typeof UsuarioId !== 'number') {
+    res.status(400).json({ error: 'Se requiere un número para UsuarioId' });
+    return;
+  }else{
+    console.log('Usuario que quiere mostrar carrito:'+UsuarioId);
+  }
+  db.query('SELECT car.Cantidad, pro.* FROM Carrito car JOIN Productos pro ON car.IDProducto = pro.IdProducto WHERE car.IDUsu = ?;', [UsuarioId], (err, results) => {
     if (err) {
       console.error('Error fetching user:', err);
       res.status(500).json({ error: 'Un error ha ocurrido mientras se buscaba el carrito.' });
@@ -250,8 +255,12 @@ app.post('/mostrarCarrito', (req, res) => {
       console.log('no funciono :(' )
       return;
     }
-    const user = results[0];
-    res.status(200).json(user);
+    results.forEach(product => {
+      if (product.Imagen) {
+        product.Imagen = `data:image/jpeg;base64,${Buffer.from(product.Imagen).toString('base64')}`;
+      }
+    });
+    res.status(200).json(results);
   });
 });
 

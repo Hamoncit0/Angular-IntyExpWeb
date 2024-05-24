@@ -5,14 +5,14 @@
             <th scope="row">Cantidad</th>
             <th scope="row">Subtotal</th>
         </tr>
-        <tr>
+        <tr *ngFor="let producto of products">
             <td >
                 <div class="flex-box">
-                <img src="../../../assets/productos/producto1.png" alt="" class="imagen-producto">
+                    <img [src]="producto.Imagen" class="imagen-producto" alt="{{ producto.Nombre }}">
                 <div class="description">
                     
-                    <span>E-ATX</span>
-                    <h4 class="nombre-producto">Gabinete Deepcool CH-780</h4>
+                    <span>{{producto.Marca}}</span>
+                    <h4 class="nombre-producto">{{producto.Nombre}}</h4>
                     <div class="opciones">
                         <button class="btn-sm btn btn-outline-primary">Ver más</button>
                         <a href="">Eliminar</a>
@@ -20,36 +20,14 @@
                 </div>
             </div>
             </td>
-            <td><input type="number" value="1" class="form-control"></td>
+            <td><input type="number" value="{{producto.Cantidad}}" class="form-control"></td>
             <td>
-                <span class="badge bg-success">50% de descuento</span>
-                <h5 class="precio">$2,369.00 MXN</h5>
-                <h5 class="precio-desc">$2,500.00 MXN</h5>
+                <!-- <span class="badge bg-success">50% de descuento</span> -->
+                <h5 class="precio">{{ producto.Precio | currency:"MXN" }}</h5>
+                <!-- <h5 class="precio-desc">$2,500.00 MXN</h5> -->
             </td>
         </tr>
-        <tr>
-            <td >
-                <div class="flex-box">
-                <img src="../../../assets/productos/producto1.png" alt="" class="imagen-producto">
-                <div class="description">
-                    
-                    <span>E-ATX</span>
-                    <h4 class="nombre-producto">Gabinete Deepcool CH-780</h4>
-                    <div class="opciones">
-                        <button class="btn-sm btn btn-outline-primary">Ver más</button>
-                        <a href="">Eliminar</a>
-                    </div>
-                </div>
-            </div>
-            </td>
-            <td><input type="number" value="1" class="form-control"></td>
-            <td>
-                <span class="badge bg-success">50% de descuento</span>
-                <h5 class="precio">$2,369.00 MXN</h5>
-                <h5 class="precio-desc">$2,500.00 MXN</h5>
-            </td>
-        </tr>
-
+        
         <tr>
             <td></td>
             <td></td>
