@@ -15,7 +15,7 @@ export class ProductService {
   }
   
   addToCart(product: Product): Observable<any> {
-    var UsuarioId =this.authService.currentUser?.ID_Usu;
+    var UsuarioId =this.authService.currentUser?.Id_Usu;
     const ProductoId = product.IdProducto;
     console.log("ID USUARIO AL AGREGAR AL CARRITO" + UsuarioId);
     console.log(this.authService.currentUser);

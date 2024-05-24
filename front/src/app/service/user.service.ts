@@ -16,7 +16,7 @@ export class UserService {
   
 
   getUserByNameandPassword(user:User): Observable<User>{
-    const {Correo, Pass}=user;
-    return this.http.post<User>(this.url+'/login',{Correo, Pass})
+    const {Nombres, Apellidos, Correo, Pass, FechaNac}=user;
+    return this.http.post<User>(this.url+'/login',{Nombres, Apellidos, Correo, Pass, FechaNac})
   }
 }

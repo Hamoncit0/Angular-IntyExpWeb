@@ -32,8 +32,8 @@ db.connect((err) => {
 //////////////USUARIO/////////////////////////////
   app.post('/users', (req, res) => {
   console.log("chi");
-  const { Usuario, Correo, Pass } = req.body;
-  db.query('INSERT INTO usuarios (Usuario, Correo, Pass) VALUES (?, ?, ?)', [Usuario, Correo, Pass], (err, result) => {
+  const { Nombres, Apellidos, Correo, Pass, FechaNac } = req.body;
+  db.query('INSERT INTO usuarios (Nombres, Apellidos, Correo, Pass, FechaNac) VALUES (?, ?, ?, ?, ?)', [Nombres, Apellidos, Correo, Pass, FechaNac], (err, result) => {
     if (err) {
       console.error('Error insertando el usuario:', err);
       res.status(500).json({ error: 'Error insertando el usuario' });
