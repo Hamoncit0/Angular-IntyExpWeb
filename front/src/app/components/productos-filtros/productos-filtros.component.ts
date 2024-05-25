@@ -8,6 +8,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ProductoComponent } from '../producto/producto.component';
 import $ from 'jquery'; 
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-productos-filtros',
@@ -38,13 +39,17 @@ export class ProductosFiltrosComponent {
   selectedCategoryNieta:Category[] = [];
   @ViewChild('categoryList') categoryList: ElementRef | undefined;
 
-  constructor(private productService: ProductService, private categoryService: CategoryService) {}
+  constructor(private productService: ProductService, private categoryService: CategoryService, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
     this.loadCategories();
     this.loadCategoriesHijas();
     this.loadCategoriesNietas();
     this.loadProducts();
+     
+     this.route.queryParams.subscribe(params => {
+      this.busqueda = params['busqueda'] || '';
+    });
   }
 
   loadCategories(): void {
@@ -67,6 +72,7 @@ export class ProductosFiltrosComponent {
     this.productService.getAllProducts().subscribe((data: Product[]) => {
       this.productos = data;
       this.productosFiltrados = data;
+      this.filterProducts();
     });
   }
 
@@ -125,7 +131,6 @@ export class ProductosFiltrosComponent {
   filterProducts(): void {
     let filtered = this.productos;
   
-    // Filter by selected categories
     if (this.selectedCategory) {
       let selectedCategoryId = this.selectedCategory.IdCategoria;
   
@@ -157,8 +162,7 @@ export class ProductosFiltrosComponent {
         this.categoriasActivas.some(categoria => categoria.IdCategoria === producto.IdCategoria)
       );
     }
-  
-    // Filter by search term
+    console.log("filtro");
     if (this.busqueda) {
       filtered = filtered.filter(producto =>
         producto.Nombre.toLowerCase().includes(this.busqueda.toLowerCase()) ||
@@ -166,7 +170,7 @@ export class ProductosFiltrosComponent {
         producto.Detalles.toLowerCase().includes(this.busqueda.toLowerCase())
       );
     }
-    // Filter by price range
+    
     filtered = filtered.filter(producto => producto.Precio >= this.precioMin && producto.Precio <= this.precioMax);
   
     this.productosFiltrados = filtered;

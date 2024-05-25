@@ -7,8 +7,8 @@
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse contenedor" id="navbarColor02">
-          <form class="d-flex">
-            <input class="form-control me-sm-2 searchbar" type="search" placeholder="Buscar">
+          <form class="d-flex" (ngSubmit)="onSearch()">
+            <input class="form-control me-sm-2 searchbar" [(ngModel)]="busquedaNavBar" name="busquedaNavBar" type="search" placeholder="Buscar">
             <button class="btn btn-secondary my-2 my-sm-0" type="submit">Buscar</button>
           </form>
           <div class="list">
