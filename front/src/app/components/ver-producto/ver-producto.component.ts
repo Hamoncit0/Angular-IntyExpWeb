@@ -38,4 +38,14 @@ export class VerProductoComponent implements OnInit{
       }
     );
   }
+
+  addToCart() {
+    // Aquí va la lógica para agregar al carrito UwU
+    console.log('Producto añadido al carrito:', this.producto);
+    this.productService.addToCart(this.producto).subscribe(response => {
+      console.log('Producto añadido al carrito:', this.producto);
+    }, error => {
+      console.error('Error al agregar al carrito:', error);
+    });
+  }
 }

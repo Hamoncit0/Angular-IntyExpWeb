@@ -2,7 +2,7 @@
   <nav class="navbar navbar-expand-lg bg-body-dark" id='navbar-id'>
     <div class="container-fluid" id='container-fluid-id'>
       <a  class="navbar-brand" id='navbar-brand-id' routerLink="">
-       DDtech
+       DDTECH
       </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -39,7 +39,7 @@
             <a class="nav-link" routerLink="/carrito">CARRITO</a>
           </li>
           <li class="nav-item" *ngIf="authService.currentUser">
-            <a class="nav-link">Hola, {{authService.currentUser.Nombres}}</a>
+            <a class="nav-link">{{authService.currentUser.Nombres.toUpperCase()}}</a>
           </li>
           <li class="nav-item" *ngIf="authService.currentUser">
             <a class="nav-link" routerLink="/dashboard" (click)="logout()">CERRAR SESIÓN</a>

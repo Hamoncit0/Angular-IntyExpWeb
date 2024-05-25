@@ -10,8 +10,7 @@
           <p class="card-text">{{ producto.Marca }}</p>
           <p class="card-text"><small class="text-muted">{{ producto.Detalles }}</small></p>
           <p class="card-text text-primary">{{ producto.Precio | currency: 'MXN' }}</p>
-          <button class="btn btn-primary">Comprar</button>
-          <button class="btn btn-outline-secondary">Agregar al carrito</button>
+          <button class="btn btn-primary" (click)="addToCart()">Agregar al carrito</button>
         </div>
       </div>
     </div>
