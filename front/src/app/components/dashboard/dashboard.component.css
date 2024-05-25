@@ -1,21 +1,6 @@
-.barras{
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    width: 100%;
-}
-.barra1{
-    height: 60px;
-}
-.barra2{
-    height: 60px;
-}
-.searchbar{
-    width: 50vw;
-    max-width: 600px;
-}
 .content{
     width: 100%;
+    padding-top: 90px;
 }
 .contenedor{
     width: 100%;

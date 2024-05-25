@@ -1,7 +1,11 @@
+
+.conteneder{
+  padding-top: 120px;
+}
+
 .card {
   margin-top: 20px;
   margin: auto;
-  margin-top: 20px;
 }
 
 .card-body {

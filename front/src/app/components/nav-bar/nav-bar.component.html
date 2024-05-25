@@ -1,59 +1,64 @@
-<div class="barras">
-        
-  <nav class="navbar navbar-expand-lg bg-dark barra1" data-bs-theme="dark">
-      <div class="container-fluid">
-        <a class="navbar-brand" routerLink="">DDtech</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse contenedor" id="navbarColor02">
-          <form class="d-flex" (ngSubmit)="onSearch()">
-            <input class="form-control me-sm-2 searchbar" [(ngModel)]="busquedaNavBar" name="busquedaNavBar" type="search" placeholder="Buscar">
-            <button class="btn btn-secondary my-2 my-sm-0" type="submit">Buscar</button>
-          </form>
-          <div class="list">
-
-              <ul class="navbar-nav me-auto">
-                  <li class="nav-item" *ngIf="authService.currentUser">
-                      <a class="nav-link">Tus Pedidos</a>
-                  </li>
-                  <li class="nav-item" *ngIf="authService.currentUser">
-                      <a class="nav-link" routerLink="/carrito">Carrito</a>
-                  </li>
-                  <li class="nav-item" *ngIf="!authService.currentUser">
-                      <a class="nav-link" routerLink="/login">Iniciar Sesion</a>
-                  </li>
-                  <li class="nav-item" *ngIf="!authService.currentUser">
-                      <a class="nav-link" routerLink="/register">Registrarse</a>
-                  </li>
-                  <li class="nav-item" *ngIf="authService.currentUser">
-                    <a class="nav-link" routerLink="/dashboard" (click)="logout()">Cerrar Sesión</a>
-                </li>
-              </ul>
-          </div>
-        </div>
+<div class='Header-main'>
+  <nav class="navbar navbar-expand-lg bg-body-dark" id='navbar-id'>
+    <div class="container-fluid" id='container-fluid-id'>
+      <a  class="navbar-brand" id='navbar-brand-id' routerLink="">
+       DDtech
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item" *ngIf="!authService.currentUser">
+            <a class="nav-link" routerLink="/login">INICIAR SESIÓN</a>
+          </li>
+          <li class="nav-item" *ngIf="!authService.currentUser">
+            <a class="nav-link" routerLink="/register">REGISTRARSE</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link" routerLink="/productosFiltros">PRODUCTOS <i class="bi bi-chevron-down"></i></a>
+            <div class="dropdown-content">
+              <a class="dropdown-link">Buscar</a>
+              <a class="dropdown-link">Tendencias</a>
+            </div>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link">ARMAR TU PC <i class="bi bi-chevron-down"></i></a>
+            <div class="dropdown-content">
+              <a class="dropdown-link">Servicios Administrados</a>
+              <a class="dropdown-link">Investigación y Desarrollo</a>
+            </div>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link">BLOG</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link">CONTACTO</a>
+          </li>
+          <li class="nav-item" *ngIf="authService.currentUser">
+            <a class="nav-link" routerLink="/carrito">CARRITO</a>
+          </li>
+          <li class="nav-item" *ngIf="authService.currentUser">
+            <a class="nav-link" routerLink="/dashboard" (click)="logout()">CERRAR SESIÓN</a>
+          </li>
+          <li class="nav-item">
+          <a class="nav-link" target="_blank">
+            <i class="bi bi-facebook"></i>
+          </a>
+          </li>
+          <li class="nav-item-icons">
+          <a class="nav-link" target="_blank">
+            <i class="bi bi-linkedin"></i>
+          </a>
+          </li>
+          <li class="nav-item-icons">
+          <a class="nav-link" target="_blank">
+            <i class="bi bi-twitter"></i>
+          </a>
+          </li>
+        </ul>
       </div>
-    </nav>
-  <nav class="navbar navbar-expand-lg bg-body-tertiary barra2">
-      <div class="container-fluid">
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor04" aria-controls="navbarColor04" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarColor04">
-          <ul class="navbar-nav me-auto contenedor">
-            <li class="nav-item">
-              <a class="nav-link" routerLink="/productosFiltros">Productos</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Armar tu PC</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Contacto</a>
-            </li>
-            
-          </ul>
-        </div>
-      </div>
-    </nav>
-  </div>
+    </div>
+  </nav>
+</div>
 <router-outlet></router-outlet>

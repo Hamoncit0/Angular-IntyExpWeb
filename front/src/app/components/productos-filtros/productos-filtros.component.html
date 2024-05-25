@@ -1,4 +1,4 @@
-<div class="container mt-3">
+<div class="container mt-3 conteneder">
     <div class="row">
       <!-- Sidebar for categories and filters -->
       <div class="col-md-3">
@@ -12,7 +12,7 @@
               <!-- Categorías hijas -->
               <div class="ml-3 esconder" *ngFor="let categoriaHija of categoriasHijas" [ngClass]="'category-' + categoria.IdCategoria" style="display: none;">
                 <div *ngIf="categoria.IdCategoria == categoriaHija.IdCatParent">
-                    <button class="list-group-item list-group-item-action list-group-item-dark" [value]="categoriaHija.IdCategoria"(click)="selectCategoryHija(categoriaHija)">{{ categoriaHija.Categoria }}</button>
+                    <button class="list-group-item list-group-item-action list-group-item-secondary" [value]="categoriaHija.IdCategoria"(click)="selectCategoryHija(categoriaHija)">{{ categoriaHija.Categoria }}</button>
                 </div>
               </div>
             </div>
@@ -61,16 +61,15 @@
             </div>
           </div>
           <div *ngFor="let producto of productosFiltrados" class="col-md-4 mb-4">
-            <div class="card">
-              <img [src]="producto.Imagen" class="card-img-top" alt="{{ producto.Nombre }}">
-              <div class="card-body">
-                <h5 class="card-title">{{ producto.Nombre }}</h5>
-                <p class="card-text">{{ producto.Marca }}</p>
-                <p class="card-text">{{ producto.Precio | currency:'MXN' }}</p>
-                <a [routerLink]="['/producto', producto.IdProducto]" class="btn btn-primary">Ver más</a>
-              </div>
-            </div>
+            <app-producto [nombre]="producto.Nombre" 
+            [descripcion]="producto.Detalles"
+            [precio]="producto.Precio" 
+            [marca]="producto.Marca" 
+            [id]="producto.IdProducto" 
+            [idCat]="producto.IdCategoria" 
+            [imagenUrl]="producto.Imagen"></app-producto>
         </div>
       </div>
     </div>
   </div>
+</div>
