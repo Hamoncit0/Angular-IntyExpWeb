@@ -39,23 +39,12 @@
             <a class="nav-link" routerLink="/carrito">CARRITO</a>
           </li>
           <li class="nav-item" *ngIf="authService.currentUser">
+            <a class="nav-link">Hola, {{authService.currentUser.Nombres}}</a>
+          </li>
+          <li class="nav-item" *ngIf="authService.currentUser">
             <a class="nav-link" routerLink="/dashboard" (click)="logout()">CERRAR SESIÓN</a>
           </li>
-          <li class="nav-item">
-          <a class="nav-link" target="_blank">
-            <i class="bi bi-facebook"></i>
-          </a>
-          </li>
-          <li class="nav-item-icons">
-          <a class="nav-link" target="_blank">
-            <i class="bi bi-linkedin"></i>
-          </a>
-          </li>
-          <li class="nav-item-icons">
-          <a class="nav-link" target="_blank">
-            <i class="bi bi-twitter"></i>
-          </a>
-          </li>
+         
         </ul>
       </div>
     </div>

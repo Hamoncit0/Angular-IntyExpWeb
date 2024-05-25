@@ -1,12 +1,16 @@
-<div class="flex-box col-md-3 mb-4 d-flex" >
-    <div class="card h-100">
-    <img [src]="producto.Imagen" alt="{{ producto.Nombre }}" class="imagen-producto">
-    <div class="description">
-        <span>{{ producto.Marca }}</span>
-        <h4 class="nombre-producto">{{ producto.Nombre }}</h4>
-        <h5 class="precio">{{ producto.Precio | currency:'MXN' }}</h5>
+<div class="card">
+    <div class="card-body">
+        <div class="imagen">
+            <img [src]="producto.Imagen" alt="" class="card-img-top">
+        </div>
+        <div class="datos">
+            <span class="card-subtitle mb-2 text-body-secondary">{{producto.Marca}}</span>
+            <h5 class="card-title">{{producto.Nombre}}</h5>
+            <h5 class="card-text">{{ producto.Precio | currency:'MXN' }}</h5>
+        </div>
     </div>
-    <button class="btn btn-primary" (click)="addToCart()">Agregar al carrito</button>
-    <button class="btn-sm btn btn-outline-primary" (click)="verMas()">Ver más</button>
+    <div class="card-footer">
+        <button class="btn btn-primary" (click)="addToCart()">Agregar al carrito</button>
+        <button class="btn btn-outline-primary" (click)="verMas()">Ver más</button>
     </div>
 </div>

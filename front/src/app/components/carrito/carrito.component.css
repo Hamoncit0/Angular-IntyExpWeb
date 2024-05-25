@@ -43,3 +43,6 @@
     margin: 10px;
 
 }
+.eliminar{
+    cursor: pointer;
+}

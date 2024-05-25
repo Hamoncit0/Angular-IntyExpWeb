@@ -1,45 +1,23 @@
+.card{
+    overflow: hidden;
+    height: 100%;
+    margin-top: auto;
+}
+.imagen {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 250px;
+    overflow: hidden;
+}
 
-.flex-box{
-    border-top: 0px;
-    height: fit-content;
-    max-height: 400px;
-    margin: 15px;
-    width: 23%;
-    min-width: 320px;
-    padding: 10px 12px;
-    text-align: left;
-    justify-items: center;
-    border: 1px solid #cccc;
-    border-radius: 5px;
-    cursor: pointer;
-    box-shadow: 20px 20px 30px rgba(0, 0, 0, 0.02);
-    transition: 0.2s ease;
-}
-.flex-box:hover{
-    box-shadow: 20px 20px 30px rgba(0,0,0,0.06);
-}
-.imagen-producto{
-    max-width: 300px;
-    max-height: 250px;
-    height: auto;
+.imagen img {
+    width: fit-content;
+    height: 100%;
+    object-fit: cover;
     border-radius: 5px;
 }
-.precio{
-    font-size: 20px;
-}
-.precio-desc{
-    font-size: 20px;
-    text-decoration: line-through;
-    color: #8e8e8ecc;
-}
-.btn{
-    margin: 3px;
-}
-.badge{
-    margin: 5px;
-    font-size: large;
-}
-.card-group{
-    
-    justify-content: space-evenly;
+.btn-outline-primary{
+    margin-left: 10px;
 }
