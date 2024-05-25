@@ -1,5 +1,5 @@
 <div class="main">
-    
+    <div class="carrito" *ngIf="hay==true">
     <table class="table">
         <thead class="table-primary">
             <tr>
@@ -26,29 +26,26 @@
                 <td>
                     <div style="display: flex;">
                         <label for="exampleSelect1" class="form-label mt-1">Cantidad</label>
-                        <select [value]="producto.Cantidad" class="form-select" id="exampleSelect1" [(ngModel)]="cantidadSeleccionada" (change)="updateCantidad(producto)">
-                          <option value="1">1</option>
-                          <option value="2">2</option>
-                          <option value="3">3</option>
-                          <option value="4">4</option>
-                          <option value="5">5</option>
-                          <option value="6">6</option>
-                        </select>
+                        <select [value]="producto.Cantidad" class="form-select" id="cantidadSelect{{producto.IdProducto}}" [(ngModel)]="producto.Cantidad" (change)="updateCantidad(producto)">
+                            <option *ngFor="let n of [1,2,3,4,5,6]" [value]="n">{{n}}</option>
+                          </select>
                     </div>
                 <td>
                     <h5 class="precio">{{ producto.Precio * producto.Cantidad | currency:"MXN" }}</h5>
                 </td>
             </tr>
             <tr>
-                <td> <button class="btn btn-outline-primary"(click)="emptyCarrito()">Vaciar Carrito</button> </td>
+                <td> <button class="btn btn-outline-primary"(click)="emptyCarrito()">Vaciar carrito</button> </td>
                 <td></td>
                 <td> Subtotal: {{ calculateTotal() | currency:"MXN" }}</td>
             </tr>
           </tbody>
 
     </table>
-
-
+    </div>
+    <div class="nohaycarrito" *ngIf="hay==false">
+        <h6>Todavia no hay productos en el carrito.</h6>
+    </div>
 
     <div class="proceder-pago">
         <h1>Pagar</h1>

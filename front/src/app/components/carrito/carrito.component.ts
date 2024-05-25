@@ -14,6 +14,7 @@ import { FormsModule } from '@angular/forms';
 })
 export class CarritoComponent implements OnInit{
   products: Product[]=[];
+  hay:boolean = false;
   cantidadSeleccionada: number;
   constructor(private productService: ProductService){
     this.cantidadSeleccionada=0;
@@ -21,10 +22,11 @@ export class CarritoComponent implements OnInit{
 
   ngOnInit() {
     console.log("EMPEZO EL CARRITO");
-    this.cantidadSeleccionada=0;
     this.productService.getCart().subscribe((productos: Product[]) => {
       this.products = productos;
       console.log(productos[0]);
+      if(productos[0]!=undefined)
+      this.hay=true;
     });
   }
   calculateTotal(): number {
@@ -45,15 +47,13 @@ export class CarritoComponent implements OnInit{
     
   }
 
-  updateCantidad(producto:Product){
-    producto.Cantidad=this.cantidadSeleccionada;
+  updateCantidad(producto: Product) {
     this.productService.updateCarrito(producto).subscribe(response => {
-      console.log('Producto updateado del carrito:', producto);
+      console.log('Cantidad actualizada en el carrito:', producto);
       this.ngOnInit();
     }, error => {
-      console.error('Error al agregar al carrito:', error);
+      console.error('Error al actualizar la cantidad en el carrito:', error);
     });
-
   }
   emptyCarrito(){
     this.productService.emptyCart().subscribe(response => {
