@@ -310,6 +310,27 @@ app.post('/categoriasNietasId', (req, res) => {
   });
 });
 
+////////////DASHBOARDS/////////////////////////
+
+app.get('/tendencias', (req, res) => {
+  console.log('entro a recoger tendencias');
+  const query ='SELECT p.*, SUM(pc.Cantidad) AS TotalComprado FROM  ProductosCompras pc JOIN Productos p ON pc.IDProducto = p.IdProducto GROUP BY p.IdProducto, p.Nombre ORDER BY TotalComprado DESC LIMIT 10;'
+  db.query(query, (err, results) => {
+    if (err) {
+      console.error('Error fetching products:', err);
+      res.status(500).json({ error: 'Un error ha ocurrido mientras se buscaban las tendencias.' });
+      return;
+    } 
+    results.forEach(product => {
+      if (product.Imagen) {
+        product.Imagen = `data:image/jpeg;base64,${Buffer.from(product.Imagen).toString('base64')}`;
+      }
+    });
+    res.status(200).json(results);
+  });
+});
+
+
 
   // Start the Express server
   app.listen(port, () => {

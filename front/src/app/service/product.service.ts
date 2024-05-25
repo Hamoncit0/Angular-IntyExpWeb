@@ -10,6 +10,7 @@ export class ProductService {
   private url = 'http://localhost:3000'
   constructor(private http: HttpClient, public authService:AutenticacionService) {}
   
+  //MOSTRAR PRODUCTOS
   getAllProducts(): Observable<Product[]> {
     return this.http.get<Product[]>(`${this.url}/products/category`);
   }
@@ -19,6 +20,7 @@ export class ProductService {
     return this.http.post<Product>(`${this.url}/productoSolo`, { ProductoId });
   }
   
+  ///CARRITO
   addToCart(product: Product): Observable<any> {
     var UsuarioId =this.authService.currentUser?.Id_Usu;
     const ProductoId = product.IdProducto;
@@ -53,5 +55,12 @@ export class ProductService {
   comprar():Observable<any> {
     const UsuarioId = this.authService.currentUser?.Id_Usu;
     return this.http.post<any>(`${this.url}/pagar`, {UsuarioId})
+  }
+
+
+  ///DASHBAORD
+  
+  getTendencias(): Observable<Product[]> {
+    return this.http.get<Product[]>(`${this.url}/tendencias`);
   }
 }

@@ -9,6 +9,7 @@ import { PagoComponent } from './components/pago/pago.component';
 import { PagoExitosoComponent } from './components/pago-exitoso/pago-exitoso.component';
 import { VerProductoComponent } from './components/ver-producto/ver-producto.component';
 import { ProductosFiltrosComponent } from './components/productos-filtros/productos-filtros.component';
+import { TendenciasComponent } from './components/tendencias/tendencias.component';
 export const routes: Routes = [
     {path:'', component:DashboardComponent},
     {path:'register', component:RegisterComponent},
@@ -18,5 +19,6 @@ export const routes: Routes = [
     {path:'pago', component:PagoComponent},
     {path:'pago-exitoso', component:PagoExitosoComponent},
     {path: 'producto/:id', component: VerProductoComponent },
-    {path: 'productosFiltros', component: ProductosFiltrosComponent}
+    {path: 'productosFiltros', component: ProductosFiltrosComponent},
+    {path: 'tendencias', component: TendenciasComponent}
 ];
