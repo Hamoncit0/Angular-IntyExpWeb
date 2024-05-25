@@ -10,20 +10,21 @@
                 {{ categoria.Categoria }}
               </button>
               <!-- Categorías hijas -->
-              <div class="ml-3" *ngFor="let categoriaHija of categoriasHijas" [ngClass]="'category-' + categoria.IdCategoria" style="display: none;">
+              <div class="ml-3 esconder" *ngFor="let categoriaHija of categoriasHijas" [ngClass]="'category-' + categoria.IdCategoria" style="display: none;">
                 <div *ngIf="categoria.IdCategoria == categoriaHija.IdCatParent">
-                  <input type="checkbox" [value]="categoriaHija.IdCategoria"(click)="selectCategoryHija(categoriaHija)" >{{ categoriaHija.Categoria }}
+                    <button class="list-group-item list-group-item-action list-group-item-dark" [value]="categoriaHija.IdCategoria"(click)="selectCategoryHija(categoriaHija)">{{ categoriaHija.Categoria }}</button>
                 </div>
               </div>
             </div>
           </div>
           
-         <!-- Categorías nietas -->
-         <div #categoryList class="ml-5" *ngFor="let categoriaNietas of categoriasNietas" [ngClass]="'category-' + categoriaNietas.IdCatParent" style="display: none;">
-           <div *ngIf="selectedCategoryHija?.IdCategoria == categoriaNietas.IdCatParent">
-           <input type="checkbox" [value]="categoriaNietas.IdCategoria">{{ categoriaNietas.Categoria }}
-           </div>
-         </div>
+            <!-- Categorías nietas -->
+        <div class="ml-5" *ngFor="let categoriaNieta of categoriasNietas" [ngClass]="'category-' + categoriaNieta.IdCatParent" [style.display]="categoriaNieta.IdCatParent === selectedCategoryHija?.IdCategoria ? 'block' : 'none'">
+            <div *ngIf="selectedCategoryHija?.IdCategoria === categoriaNieta.IdCatParent">
+            <input type="checkbox" [checked]="selectedCategoryNieta.includes(categoriaNieta)" (change)="selectCategoryNieta(categoriaNieta)">
+            {{ categoriaNieta.Categoria }}
+            </div>
+        </div>
   
         <!-- Price Range Filter -->
         <div class="mt-4">
@@ -44,6 +45,10 @@
             <option value="priceAsc">Precio (menor a mayor)</option>
             <option value="priceDesc">Precio (mayor a menor)</option>
           </select>
+        </div>
+        
+        <div class="mt-4">
+            <button class="btn btn-primary-outline" (click)="resetear()">Vaciar Filtros</button>
         </div>
       </div>
   

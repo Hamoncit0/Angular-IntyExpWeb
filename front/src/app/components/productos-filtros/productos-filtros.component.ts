@@ -75,6 +75,8 @@ export class ProductosFiltrosComponent {
   selectCategory(categoria:Category){
     
     this.selectedCategory = categoria;
+    this.selectedCategoryHija = null;
+    this.selectedCategoryNieta = [];
     console.log(this.selectedCategory);
     this.filterProducts();
      // Expandir o contraer las categorías hijas y nietas
@@ -86,9 +88,37 @@ export class ProductosFiltrosComponent {
     this.selectedCategoryHija = categoria;
     console.log(this.selectedCategoryHija);
     this.selectedCategory = null;
-    this.activarProductospoHijas(categoria.IdCategoria);
+    this.selectedCategoryNieta = [];
+    //this.activarProductospoHijas(categoria.IdCategoria);
     this.filterProducts();
-    this.toggleCategories(categoria.IdCategoria);
+    //this.toggleCategories(categoria.IdCategoria);
+    
+    const parent = this.categorias.findIndex(cat=>cat.IdCategoria=== categoria.IdCatParent);
+    this.selectedCategory = this.categorias[parent];
+  }
+  selectCategoryNieta(categoria:Category){
+    this.selectedCategoryHija = null;
+    this.selectedCategory = null;
+    const index = this.selectedCategoryNieta.findIndex(cat => cat.IdCategoria === categoria.IdCategoria);
+    if (index > -1) {
+      this.selectedCategoryNieta.splice(index, 1);
+      console.log("Se quito",index);
+    } else {
+      this.selectedCategoryNieta.push(categoria);
+      console.log("Se agrego",categoria);
+    }
+    this.filterProducts();
+    
+    const parent = this.categoriasHijas.findIndex(cat=>cat.IdCategoria=== categoria.IdCatParent);
+    this.selectedCategoryHija = this.categoriasHijas[parent];
+    
+    if(this.selectedCategoryNieta.length === 0){
+      this.filterProducts();
+    }
+    const parent1 = this.categorias.findIndex(cat=>cat.IdCategoria=== categoria.IdCatParent);
+    this.selectedCategory = this.categorias[parent1];
+    
+    
   }
 
   filterProducts(): void {
@@ -116,6 +146,15 @@ export class ProductosFiltrosComponent {
       filtered = filtered.filter(producto => 
         this.categoriasActivas.some(categoria => categoria.IdCategoria === producto.IdCategoria)
        );
+    }
+    else if (this.selectedCategoryNieta.length > 0) {
+      console.log("va a activar por nietas de", this.selectedCategoryNieta)
+      let selectedCategoryIds = this.selectedCategoryNieta.map(categoria => categoria.IdCategoria);
+      console.log(selectedCategoryIds);
+      this.activarProductosporNietas(selectedCategoryIds);
+      filtered = filtered.filter(producto =>
+        this.categoriasActivas.some(categoria => categoria.IdCategoria === producto.IdCategoria)
+      );
     }
   
     // Filter by price range
@@ -181,7 +220,15 @@ export class ProductosFiltrosComponent {
       }
     }
   }
-  
+  activarProductosporNietas(selectedCategoryIds: number[]): void {
+    this.categoriasActivas = [];
+    for (let nieta of this.categoriasNietas) {
+      if (selectedCategoryIds.includes(nieta.IdCategoria)) {
+        this.categoriasActivas.push(nieta);
+        console.log("se activo:", nieta)
+      }
+    }
+  }
 
 
   sortProducts(): void {
@@ -201,7 +248,29 @@ export class ProductosFiltrosComponent {
     }
   }
   toggleCategories(selectedCategoryId: number): void {
+    
+    $(this.categoryList?.nativeElement).find('.esconder').hide();
     $(this.categoryList?.nativeElement).find('.category-' + selectedCategoryId).toggle();
+  }
+  resetear(): void {
+    // Resetear campos de filtrado
+    this.precioMin = 0;
+    this.precioMax = 10000;
+    this.sortOrder = 'alphaAsc';
+  
+    // Resetear categorías seleccionadas
+    this.selectedCategory = null;
+    this.selectedCategoryHija = null;
+    this.selectedCategoryNieta = [];
+  
+    // Limpiar productos filtrados
+    this.productosFiltrados = this.productos;
+  
+    // Limpiar categorías activas
+    this.categoriasActivas = [];
+  
+    // Cerrar todas las categorías desplegadas
+    $(this.categoryList?.nativeElement).find('.esconder').hide();
   }
 
 
