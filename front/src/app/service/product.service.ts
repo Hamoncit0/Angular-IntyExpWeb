@@ -52,9 +52,13 @@ export class ProductService {
     const UsuarioId = this.authService.currentUser?.Id_Usu;
     return this.http.post<any>(`${this.url}/borrarCarrito`, {UsuarioId});
   }
-  comprar():Observable<any> {
+
+  //CONSEGUIR CARRITO Y SUMAR EL TOTAL Y LUEGO PASARLO
+  comprar(Productos:Product[], total:number):Observable<any> {
     const UsuarioId = this.authService.currentUser?.Id_Usu;
-    return this.http.post<any>(`${this.url}/pagar`, {UsuarioId})
+    const Total = total;
+    const productos =Productos;
+    return this.http.post<any>(`${this.url}/pagar`, {UsuarioId, Total, productos})
   }
 
 

@@ -15,11 +15,11 @@ export class PagoComponent {
   }
 
   comprar(){
-    this.productService.comprar().subscribe(response => {
-      console.log('Pago exitoso');
-    }, error => {
-      console.error('Error al pagar', error);
+  //   this.productService.comprar().subscribe(response => {
+  //     console.log('Pago exitoso');
+  //   }, error => {
+  //     console.error('Error al pagar', error);
       
-    });
-  }
+  //   });
+   }
 }

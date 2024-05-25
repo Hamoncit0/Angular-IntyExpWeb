@@ -282,34 +282,6 @@ app.get('/categoriasNietas', (req, res) => {
   });
 });
 
-app.post('/categoriasHijasId', (req, res) => {
-  console.log('entro a categorias hijas id mostrar');
-  const CategoriaId = req.body.UsuarioId;
-  
-  db.query('SELECT hijas.* FROM categorias hijas JOIN categorias padre ON hijas.IdCatParent = padre.IdCategoria WHERE padre.IdCatParent IS NULL AND padre.IdCategoria=?;', [CategoriaId], (err, results) => {
-    if (err) {
-      console.error('Error fetching user:', err);
-      res.status(500).json({ error: 'Un error ha ocurrido mientras se buscaba el carrito.' });
-      return;
-    }
-    res.status(200).json(results);
-  });
-});
-
-app.post('/categoriasNietasId', (req, res) => {
-  console.log('entro a categorias hijas id mostrar');
-  const CategoriaId = req.body.UsuarioId;
-  
-  db.query('SELECT nietas.* FROM categorias padre JOIN categorias hijas ON padre.IdCategoria = hijas.IdCatParent JOIN categorias nietas ON hijas.IdCategoria = nietas.IdCatParent WHERE nietas.IdCatParent IS NOT NULL AND nietas.IdCatParent=?;', [CategoriaId], (err, results) => {
-    if (err) {
-      console.error('Error fetching user:', err);
-      res.status(500).json({ error: 'Un error ha ocurrido mientras se buscaba el carrito.' });
-      return;
-    }
-    res.status(200).json(results);
-  });
-});
-
 ////////////DASHBOARDS/////////////////////////
 
 app.get('/tendencias', (req, res) => {
@@ -332,6 +304,33 @@ app.get('/tendencias', (req, res) => {
 
 
 
+////////////PAGAR///////////////
+app.post('/comprar', (req, res) => {
+  const { UsuarioId, Total, productos } = req.body;
+
+  // Insertar la compra en la tabla de Compras
+  const compraQuery = `INSERT INTO Compras (IDUsu, FechaCompra, Total) VALUES (${UsuarioId}, NOW(), ${Total})`;
+  db.query(compraQuery, (err, result) => {
+    if (err) {
+      console.error('Error al realizar la compra:', err);
+      res.status(500).send('Error al realizar la compra');
+    } else {
+      const IDCompra = result.insertId;
+      
+      // Lo pone en jason
+      const productosComprasValues = productos.map(producto => `(${IDCompra}, ${producto.IDProducto}, ${producto.Cantidad})`).join(',');
+      const productosComprasQuery = `INSERT INTO ProductosCompras (IDCompra, IDProducto, Cantidad) VALUES ${productosComprasValues}`;
+      db.query(productosComprasQuery, (err, result) => {
+        if (err) {
+          console.error('Error al agregar productos comprados:', err);
+          res.status(500).send('Error al agregar productos comprados');
+        } else {
+          res.status(200).send('Compra realizada exitosamente');
+        }
+      });
+    }
+  });
+});
   // Start the Express server
   app.listen(port, () => {
     console.log(`El servidor esta corriendo en http://localhost:${port}`);
