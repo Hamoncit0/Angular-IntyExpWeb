@@ -6,7 +6,6 @@ export interface Product{
     Precio: number;
     Imagen: string;
     Cantidad:number;
-    Id_Usu: number;
     IdCategoria:number;
 
 }

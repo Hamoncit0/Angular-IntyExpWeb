@@ -6,12 +6,13 @@ import { Category } from '../../interfaces/category';
 import { RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { ProductoComponent } from '../producto/producto.component';
 import $ from 'jquery'; 
 
 @Component({
   selector: 'app-productos-filtros',
   standalone: true,
-  imports: [RouterLink, CommonModule, FormsModule],
+  imports: [RouterLink, CommonModule, FormsModule, ProductoComponent],
   templateUrl: './productos-filtros.component.html',
   styleUrl: './productos-filtros.component.css'
 })

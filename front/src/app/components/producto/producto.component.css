@@ -1,0 +1,68 @@
+
+.flex-box{
+    height: fit-content;
+    margin: 15px;
+    width: 23%;
+    min-width: 320px;
+    padding: 10px 12px;
+    text-align: left;
+    justify-items: center;
+    border: 1px solid #cccc;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 20px 20px 30px rgba(0, 0, 0, 0.02);
+    transition: 0.2s ease;
+}
+.flex-box:hover{
+    box-shadow: 20px 20px 30px rgba(0,0,0,0.06);
+}
+.imagen-producto{
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+.precio{
+    font-size: 20px;
+}
+.precio-desc{
+    font-size: 20px;
+    text-decoration: line-through;
+    color: #8e8e8ecc;
+}
+.btn{
+    margin: 3px;
+}
+.badge{
+    margin: 5px;
+    font-size: large;
+}
+.card-group{
+    
+    justify-content: space-evenly;
+}
+.banner{
+    text-align: center;
+    margin-top: 30px;
+}
+.onichan{
+    padding: 30px;
+    margin: 20px;
+    border: solid 1px gray;
+    border-radius: 5px;
+    height:auto;
+    width:400px;
+    justify-items: center;
+    margin-top: 20px;
+}
+.uwu{
+    width: auto;
+    height: auto;
+    border-radius: 5px;
+    max-width: 250px;
+    margin: auto;
+    margin-bottom: 20px;
+}
+.onichan:hover{
+    
+    cursor: pointer;
+}

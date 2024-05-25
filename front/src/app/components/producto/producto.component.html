@@ -1,1 +1,11 @@
-<p>producto works!</p>
+<div class="flex-box">
+    <img [src]="producto.Imagen" alt="{{ producto.Nombre }}" class="imagen-producto">
+    <div class="description">
+        <span>{{ producto.Marca }}</span>
+        <h4 class="nombre-producto">{{ producto.Nombre }}</h4>
+        <h5 class="precio">{{ producto.Precio | currency:'MXN' }}</h5>
+    </div>
+    <button class="btn btn-primary" (click)="addToCart()">Agregar al carrito</button>
+    <button class="btn-sm btn btn-outline-primary" (click)="verMas()">Ver más</button>
+</div>
+  
