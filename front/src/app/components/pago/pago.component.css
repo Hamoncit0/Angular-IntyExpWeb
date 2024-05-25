@@ -1,5 +1,6 @@
 
 .content{
+    padding-top: 100px;
     display: flex;
 }
 .detalles{
@@ -8,17 +9,34 @@
     margin-top: 20px;
     margin-bottom: 20px;
     border: solid 1px rgb(164, 164, 164);
-    padding: 20px;
+    padding: 40px;
+    border-radius: 10px;
 }
 .direccion{
     margin-bottom: 15px;
 }
 .confirmar{
+    display:grid;
+    width: 25%;
     position: sticky;
-    top:130px;
+    top:120px;
     height: fit-content;
     border: solid 1px rgb(164, 164, 164);
     margin: 10px;
     margin-top: 20px;
-    padding: 10px;
+    padding: 20px;
+    border-radius: 10px;
+}
+.mostrarsubtotal{
+    padding-left: 40px;
+    padding-right: 40px;
+    display: flex;
+    justify-content: space-between;
+}
+.btn-success{
+    margin-top: 5px;
+}
+.line{
+    border: solid 1px rgb(197, 197, 197);
+    margin: 5px;
 }

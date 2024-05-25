@@ -18,6 +18,9 @@
     object-fit: cover;
     border-radius: 5px;
 }
+.card-footer{
+    display: flex;
+}
 .btn-outline-primary{
     margin-left: 10px;
 }

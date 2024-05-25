@@ -2,10 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { Product } from '../../interfaces/product';
 import { ProductService } from '../../service/product.service';
 import { CommonModule } from '@angular/common';
+import { ProductoComponent } from '../producto/producto.component';
+
 @Component({
   selector: 'app-tendencias',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, ProductoComponent],
   templateUrl: './tendencias.component.html',
   styleUrl: './tendencias.component.css'
 })

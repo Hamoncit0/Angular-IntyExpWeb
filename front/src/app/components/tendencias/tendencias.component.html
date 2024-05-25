@@ -3,15 +3,13 @@
     <div class="col-md-9">
       <div class="row" >
         <div *ngFor="let producto of tendencias" class="col-md-4 mb-4">
-          <div class="card">
-            <img [src]="producto.Imagen" class="card-img-top" alt="{{ producto.Nombre }}">
-            <div class="card-body">
-              <h5 class="card-title">{{ producto.Nombre }}</h5>
-              <p class="card-text">{{ producto.Marca }}</p>
-              <p class="card-text">{{ producto.Precio | currency:'MXN' }}</p>
-              <a class="btn btn-primary">Ver más</a>
-            </div>
-          </div>
+          <app-producto [nombre]="producto.Nombre" 
+            [descripcion]="producto.Detalles"
+            [precio]="producto.Precio" 
+            [marca]="producto.Marca" 
+            [id]="producto.IdProducto" 
+            [idCat]="producto.IdCategoria" 
+            [imagenUrl]="producto.Imagen"></app-producto>
       </div>
     </div>
   </div>

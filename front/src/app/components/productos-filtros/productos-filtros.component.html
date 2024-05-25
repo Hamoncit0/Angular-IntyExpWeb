@@ -60,7 +60,7 @@
               <input type="text" class="form-control" placeholder="Buscar productos" [(ngModel)]="busqueda" (input)="filterProducts()">
             </div>
           </div>
-          <div *ngFor="let producto of productosFiltrados" class="col-md-4 mb-4">
+          <div *ngFor="let producto of productosFiltrados" class="col-md-6 col-lg-4">
             <app-producto [nombre]="producto.Nombre" 
             [descripcion]="producto.Detalles"
             [precio]="producto.Precio" 
