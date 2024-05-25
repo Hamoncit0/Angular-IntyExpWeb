@@ -48,24 +48,28 @@
         </div>
         
         <div class="mt-4">
-            <button class="btn btn-primary-outline" (click)="resetear()">Vaciar Filtros</button>
+            <button type="button" class="btn btn-primary" (click)="resetear()">Vaciar Filtros</button>
         </div>
       </div>
   
       <!-- Main content for products -->
       <div class="col-md-9">
         <div class="row" >
-          <div *ngFor="let producto of productosFiltrados">
-            <app-producto *ngFor="let producto of productosFiltrados"
-                      [id]="producto.IdProducto"
-                      [nombre]="producto.Nombre"
-                      [marca]="producto.Marca"
-                      [descripcion]="producto.Detalles"
-                      [imagenUrl]="producto.Imagen"
-                      [precio]="producto.Precio"
-                      [idCat]="producto.IdCategoria">
-            </app-producto>
+          <div class="row mb-3">
+            <div class="col">
+              <input type="text" class="form-control" placeholder="Buscar productos" [(ngModel)]="busqueda" (input)="filterProducts()">
+            </div>
           </div>
+          <div *ngFor="let producto of productosFiltrados" class="col-md-4 mb-4">
+            <div class="card">
+              <img [src]="producto.Imagen" class="card-img-top" alt="{{ producto.Nombre }}">
+              <div class="card-body">
+                <h5 class="card-title">{{ producto.Nombre }}</h5>
+                <p class="card-text">{{ producto.Marca }}</p>
+                <p class="card-text">{{ producto.Precio | currency:'MXN' }}</p>
+                <a [routerLink]="['/producto', producto.IdProducto]" class="btn btn-primary">Ver más</a>
+              </div>
+            </div>
         </div>
       </div>
     </div>

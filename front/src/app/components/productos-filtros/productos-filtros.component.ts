@@ -25,7 +25,7 @@ export class ProductosFiltrosComponent {
   categoriasNietas: Category[] = [];
   //productos filtrados
   productosFiltrados: Product[] = [];
-
+  busqueda:string = "";
   //campos para filtrar
   precioMin: number = 0;
   precioMax: number = 10000;
@@ -158,6 +158,14 @@ export class ProductosFiltrosComponent {
       );
     }
   
+    // Filter by search term
+    if (this.busqueda) {
+      filtered = filtered.filter(producto =>
+        producto.Nombre.toLowerCase().includes(this.busqueda.toLowerCase()) ||
+        producto.Marca.toLowerCase().includes(this.busqueda.toLowerCase()) ||
+        producto.Detalles.toLowerCase().includes(this.busqueda.toLowerCase())
+      );
+    }
     // Filter by price range
     filtered = filtered.filter(producto => producto.Precio >= this.precioMin && producto.Precio <= this.precioMax);
   
@@ -269,7 +277,7 @@ export class ProductosFiltrosComponent {
   
     // Limpiar categorías activas
     this.categoriasActivas = [];
-  
+    this.busqueda="";
     // Cerrar todas las categorías desplegadas
     $(this.categoryList?.nativeElement).find('.esconder').hide();
   }
