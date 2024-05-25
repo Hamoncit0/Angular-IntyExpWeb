@@ -21,4 +21,8 @@ export class CategoryService {
   getCategoriasNietas(): Observable<Category[]> {
     return this.http.get<Category[]>(`${this.url}/categoriasNietas`);
   }
+  getHijasId(categoriaId: number): Observable<Category[]> {
+   const CategoriaId = categoriaId;
+    return this.http.post<Category[]>(`${this.url}/categoriasHijasId`, { CategoriaId });
+  }
 }

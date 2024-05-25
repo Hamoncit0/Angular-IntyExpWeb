@@ -85,6 +85,8 @@ export class ProductosFiltrosComponent {
     
     this.selectedCategoryHija = categoria;
     console.log(this.selectedCategoryHija);
+    this.selectedCategory = null;
+    this.activarProductospoHijas(categoria.IdCategoria);
     this.filterProducts();
     this.toggleCategories(categoria.IdCategoria);
   }
@@ -94,10 +96,21 @@ export class ProductosFiltrosComponent {
   
     // Filter by selected categories
     if (this.selectedCategory) {
-      const selectedCategoryId = this.selectedCategory.IdCategoria;
+      let selectedCategoryId = this.selectedCategory.IdCategoria;
   
       // Activar categorías seleccionadas
       this.activarCategoriasSeleccionadas(selectedCategoryId);
+  
+      // Filtrar productos que pertenecen a las categorías activas 
+      filtered = filtered.filter(producto => 
+        this.categoriasActivas.some(categoria => categoria.IdCategoria === producto.IdCategoria)
+       );
+    }
+    else if(this.selectedCategoryHija){
+      let selectedCategoryId = this.selectedCategoryHija.IdCategoria;
+  
+      // Activar categorías seleccionadas
+      this.activarProductospoHijas(selectedCategoryId);
   
       // Filtrar productos que pertenecen a las categorías activas 
       filtered = filtered.filter(producto => 
@@ -145,6 +158,29 @@ export class ProductosFiltrosComponent {
     return this.categoriasActivas;
   }
   
+  activarProductospoHijas(selectedCategoryId:number){
+    console.log("PRODUCTO POR HIJAS"+selectedCategoryId);
+    this.categoriasActivas = [];
+    for(let hija of this.categoriasHijas){
+      if(hija.IdCategoria==selectedCategoryId){
+        this.categoriasActivas.push(hija);
+        console.log(hija.Categoria);
+      }
+    }
+
+    for(let hija of this.categoriasHijas){
+
+      if(hija.IdCategoria==selectedCategoryId){
+        for(let nieta of this.categoriasNietas){
+          if(nieta.IdCatParent == hija.IdCategoria){
+            
+            this.categoriasActivas.push(nieta);
+            console.log(nieta.Categoria);
+          }
+        }
+      }
+    }
+  }
   
 
 

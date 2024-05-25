@@ -282,6 +282,33 @@ app.get('/categoriasNietas', (req, res) => {
   });
 });
 
+app.post('/categoriasHijasId', (req, res) => {
+  console.log('entro a categorias hijas id mostrar');
+  const CategoriaId = req.body.UsuarioId;
+  
+  db.query('SELECT hijas.* FROM categorias hijas JOIN categorias padre ON hijas.IdCatParent = padre.IdCategoria WHERE padre.IdCatParent IS NULL AND padre.IdCategoria=?;', [CategoriaId], (err, results) => {
+    if (err) {
+      console.error('Error fetching user:', err);
+      res.status(500).json({ error: 'Un error ha ocurrido mientras se buscaba el carrito.' });
+      return;
+    }
+    res.status(200).json(results);
+  });
+});
+
+app.post('/categoriasNietasId', (req, res) => {
+  console.log('entro a categorias hijas id mostrar');
+  const CategoriaId = req.body.UsuarioId;
+  
+  db.query('SELECT nietas.* FROM categorias padre JOIN categorias hijas ON padre.IdCategoria = hijas.IdCatParent JOIN categorias nietas ON hijas.IdCategoria = nietas.IdCatParent WHERE nietas.IdCatParent IS NOT NULL AND nietas.IdCatParent=?;', [CategoriaId], (err, results) => {
+    if (err) {
+      console.error('Error fetching user:', err);
+      res.status(500).json({ error: 'Un error ha ocurrido mientras se buscaba el carrito.' });
+      return;
+    }
+    res.status(200).json(results);
+  });
+});
 
 
   // Start the Express server
