@@ -19,8 +19,9 @@
     border-radius: 5px;
 }
 .card-footer{
-    display: flex;
+    display: inline;
 }
-.btn-outline-primary{
-    margin-left: 10px;
+.btn{
+    margin: 5px;
+    width: 100%;
 }

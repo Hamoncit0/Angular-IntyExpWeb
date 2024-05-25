@@ -48,7 +48,7 @@
                min="1925-01-01" max="2022-12-31" >
                <small class="text-danger" *ngIf="userForm.get('birthday')?.invalid && userForm.get('birthday')?.touched"> Ingrese una fecha de nacimiento válida.</small>
            </div>
-            <input type="submit" value="Regístrate" class="btn btn-primary" [disabled]="userForm.invalid">
+            <input type="submit" value="Registrarse" class="btn btn-primary" [disabled]="userForm.invalid">
             <div class="undertext" style="margin-top: 5px;">
                 <p>¿Ya tienes una cuenta? <a class="link" routerLink="/login">Iniciar Sesión</a></p>
             </div>

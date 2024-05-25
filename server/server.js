@@ -307,20 +307,21 @@ app.get('/tendencias', (req, res) => {
 ////////////PAGAR///////////////
 app.post('/comprar', (req, res) => {
   const { UsuarioId, Total, productos } = req.body;
-
+  console.log("entro a comprar");
+  
   // Insertar la compra en la tabla de Compras
-  const compraQuery = `INSERT INTO Compras (IDUsu, FechaCompra, Total) VALUES (${UsuarioId}, NOW(), ${Total})`;
-  db.query(compraQuery, (err, result) => {
+  const compraQuery = `INSERT INTO Compras (IDUsu, FechaCompra, Total) VALUES (?, NOW(), ?)`;
+  db.query(compraQuery, [UsuarioId, Total], (err, result) => {
     if (err) {
       console.error('Error al realizar la compra:', err);
       res.status(500).send('Error al realizar la compra');
     } else {
       const IDCompra = result.insertId;
       
-      // Lo pone en jason
-      const productosComprasValues = productos.map(producto => `(${IDCompra}, ${producto.IDProducto}, ${producto.Cantidad})`).join(',');
-      const productosComprasQuery = `INSERT INTO ProductosCompras (IDCompra, IDProducto, Cantidad) VALUES ${productosComprasValues}`;
-      db.query(productosComprasQuery, (err, result) => {
+      // Insertar los productos comprados en la tabla ProductosCompras
+      const productosComprasValues = productos.map(producto => [IDCompra, producto.IdProducto, producto.Cantidad]);
+      const productosComprasQuery = `INSERT INTO ProductosCompras (IDCompra, IDProducto, Cantidad) VALUES ?`;
+      db.query(productosComprasQuery, [productosComprasValues], (err, result) => {
         if (err) {
           console.error('Error al agregar productos comprados:', err);
           res.status(500).send('Error al agregar productos comprados');
@@ -331,6 +332,7 @@ app.post('/comprar', (req, res) => {
     }
   });
 });
+
   // Start the Express server
   app.listen(port, () => {
     console.log(`El servidor esta corriendo en http://localhost:${port}`);

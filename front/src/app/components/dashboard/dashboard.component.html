@@ -79,7 +79,7 @@
             <h3 class="card-title">Tendencias</h3>
           </div>
         </div>
-        <div class="onichan">
+        <div class="onichan" *NgIf="!authService.currentUser">
           <img src="../../../assets/productos/producto2.png" class="card-img-top uwu" alt="...">
           <div class="card-body">
             <h3 class="card-title">Continúa Comprando</h3>

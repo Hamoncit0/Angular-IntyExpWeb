@@ -21,6 +21,7 @@ export class CarritoComponent implements OnInit{
   }
 
   ngOnInit() {
+    this.hay =false;
     console.log("EMPEZO EL CARRITO");
     this.productService.getCart().subscribe((productos: Product[]) => {
       this.products = productos;

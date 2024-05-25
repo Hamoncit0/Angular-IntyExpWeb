@@ -5,6 +5,7 @@ import { Product } from '../../interfaces/product';
 import { ProductListComponent } from '../product-list/product-list.component';
 import { ProductoComponent } from '../producto/producto.component';
 import { ProductService } from '../../service/product.service';
+import { AutenticacionService } from '../../service/autenticacion.service';
 @Component({
   selector: 'app-dashboard',
   standalone: true,
@@ -15,7 +16,7 @@ import { ProductService } from '../../service/product.service';
 export class DashboardComponent implements OnInit {
   tendencias: Product[] = [];
   tendencia!:Product;
-  constructor(private productService:ProductService){
+  constructor(private productService:ProductService, public authService:AutenticacionService){
     
   }
   ngOnInit(): void {

@@ -71,17 +71,17 @@
     <div class="confirmar">
         <h3>Confirmación del pedido</h3>
         <div class="mostrarsubtotal">
-            <h5>Productos:</h5> <h5>$200</h5>
+            <h5>Productos:</h5> <h5>${{subtotal | currency:'MXN'}}</h5>
         </div>
         <div class="mostrarsubtotal">
-            <h5>Envío:</h5> <h5>$20</h5>
+            <h5>Envío:</h5> <h5>${{envio | currency:'MXN'}}</h5>
         </div>
         <div class="line"></div>
         <div class="mostrarsubtotal">
-            <h5>Total:</h5> <h5>$220</h5>
+            <h5>Total:</h5> <h5>{{total | currency:'MXN'}}</h5>
         </div>
           
-        <button class="btn btn-success" routerLink="/pago-exitoso" >Pagar</button>
+        <button class="btn btn-success" (click)="comprar()" routerLink="/pago-exitoso" >Pagar</button>
     </div>
 </div>
 

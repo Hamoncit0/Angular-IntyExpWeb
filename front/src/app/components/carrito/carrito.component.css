@@ -2,6 +2,10 @@
 .main{
     display: flex;
     padding-top: 120px;
+    margin: 20px;
+}
+.contenido{
+    flex-basis: 75%;
 }
 .flex-box{
     display: flex;
@@ -33,9 +37,10 @@
 }
 
 .proceder-pago{
+    flex-basis: 25%;
     border: solid;
     border-width: 1px;
-    border-radius: 3px;
+    border-radius: 10px;
     border-color: #8e8e8ecc;
     width: 30%;
     height: 50%;
@@ -45,4 +50,7 @@
 }
 .eliminar{
     cursor: pointer;
+}
+.table{
+    width: 100%;
 }

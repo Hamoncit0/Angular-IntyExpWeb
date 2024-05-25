@@ -4,7 +4,7 @@
         
     <form class="formulario" [formGroup]="logInForm" (ngSubmit)="logIn()">
     
-    <h1 class="card-header">Inicio Sesion</h1>
+    <h1 class="card-header">Iniciar Sesión</h1>
      <div class="contenedor card-body">
      
          
@@ -21,9 +21,9 @@
             <small class="text-danger">{{ errorMessage }}</small>
             <br>
         </div>
-         <input type="submit" class="btn btn-primary" value="Login" >
+         <input type="submit" class="btn btn-primary" value="Iniciar Sesión" >
         <div class="undertext" style="margin-top: 5px;">
-            <p>¿No tienes una cuenta? <a class="link" routerLink="/register">Registrate </a></p>
+            <p>¿Todavía no tienes una cuenta? <a class="link" routerLink="/register">Regístrate </a></p>
         </div>
      </div>
     </form>

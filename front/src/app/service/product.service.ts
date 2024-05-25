@@ -57,8 +57,12 @@ export class ProductService {
   comprar(Productos:Product[], total:number):Observable<any> {
     const UsuarioId = this.authService.currentUser?.Id_Usu;
     const Total = total;
-    const productos =Productos;
-    return this.http.post<any>(`${this.url}/pagar`, {UsuarioId, Total, productos})
+    const productos = Productos.map(producto => ({
+      IdProducto: producto.IdProducto,
+      Cantidad: producto.Cantidad
+    }));
+    console.log({ UsuarioId, Total, productos });
+    return this.http.post<any>(`${this.url}/comprar`, {UsuarioId, Total, productos})
   }
 
 
