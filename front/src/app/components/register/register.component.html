@@ -37,8 +37,12 @@
             
             <div class="input-contenedor mb-3" >
              <label for="floatingPassword" class="form-label mt-4">Contraseña</label>
-             <input formControlName="password" type="password" class="form-control" id="floatingPassword" placeholder="Contraseña">
-             <small class="text-danger" *ngIf="userForm.get('password')?.invalid && userForm.get('password')?.touched">Ingrese una contraseña con mínimo 6 caracteres.</small>
+             <input formControlName="password" [type]="hidePassword ? 'password' : 'text'" class="form-control" id="floatingPassword" placeholder="Contraseña">
+             <!-- <small class="text-danger"  *ngIf="userForm.get('password')?.invalid && userForm.get('password')?.touched">Ingrese una contraseña con mínimo 6 caracteres.</small> -->
+             <div *ngIf="password?.invalid && (password?.dirty || password?.touched)">
+                <small class="text-danger">{{ getFirstPasswordError() }}</small>
+              </div>
+             <button class="btn btn-sm" type="button" (click)="togglePasswordVisibility()">{{ hidePassword ? 'Show' : 'Hide' }} Password</button>
            </div>
    
            <div class="input-contenedor mb-3">

@@ -19,6 +19,8 @@ export class RegisterComponent {
   userForm: FormGroup;
   usuario: User = {Correo:'', Pass:'', Nombres:'', Apellidos:''}
   mensajeChi: String = "";
+  hidePassword = true;
+
   //constructor para inicializar cositas
   constructor(private userService: UserService, private router:Router){
     this.userForm =  new FormGroup({
@@ -26,7 +28,7 @@ export class RegisterComponent {
       firstName: new FormControl("", [Validators.required, Validators.minLength(5), Validators.maxLength(20)]),
       lastName: new FormControl("", [Validators.required, Validators.minLength(5), Validators.maxLength(20)]),
       email: new FormControl("", [Validators.required, Validators.email]),
-      password: new FormControl("", [Validators.required, Validators.minLength(6), Validators.maxLength(30)])
+      password: new FormControl("", [Validators.required, Validators.minLength(6), Validators.maxLength(30), Validators.pattern(/[A-Z]/), Validators.pattern(/\d/),  Validators.pattern(/[!@#$%^&*(),.?":{}|<>]/)])
     })
 
    }
@@ -38,7 +40,7 @@ export class RegisterComponent {
       firstName: new FormControl("", [Validators.required, Validators.minLength(5), Validators.maxLength(20)]),
       lastName: new FormControl("", [Validators.required, Validators.minLength(5), Validators.maxLength(20)]),
       email: new FormControl("", [Validators.required, Validators.email]),
-      password: new FormControl("", [Validators.required, Validators.minLength(6), Validators.maxLength(30)])
+      password: new FormControl("", [Validators.required, Validators.minLength(6), Validators.maxLength(30), Validators.pattern(/[A-Z]/), Validators.pattern(/\d/),  Validators.pattern(/[!@#$%^&*(),.?":{}|<>]/)])
     })
    }
 
@@ -70,6 +72,41 @@ export class RegisterComponent {
     }
     
 
+  }
+  togglePasswordVisibility() {
+    this.hidePassword = !this.hidePassword;
+  }
+
+  get password() {
+    return this.userForm.get('password');
+  }
+
+  getFirstPasswordError() {
+    const errors = this.password?.errors;
+    if (!errors) {
+      return null;
+    }
+
+    if (errors['required']) {
+      return 'Password is required.';
+    }
+    if (errors['minlength']) {
+      return 'Password must be at least 6 characters long.';
+    }
+    if (errors['maxlength']) {
+      return 'Password cannot be more than 30 characters long.';
+    }
+    if (!/[A-Z]/.test(this.password?.value)) {
+      return 'Password must contain at least one uppercase letter.';
+    }
+    if (!/\d/.test(this.password?.value)) {
+      return 'Password must contain at least one number.';
+    }
+    if (!/[!@#$%^&*(),.?":{}|<>]/.test(this.password?.value)) {
+      return 'Password must contain at least one special character.';
+    }
+
+    return null;
   }
 
 }
