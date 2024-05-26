@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ProductService } from '../../service/product.service';
 import { Product } from '../../interfaces/product';
 import { Router } from '@angular/router';
+import { NotificationService } from '../../service/notification.service';
 @Component({
   selector: 'app-producto',
   standalone: true,
@@ -19,7 +20,7 @@ export class ProductoComponent implements OnChanges{
   @Input() precio: number = 0;
   @Input() idCat: number = 0;
   producto:Product ={IdProducto:this.id, Nombre:this.nombre, Marca:this.marca,Detalles:this.descripcion, Imagen:this.imagenUrl, Precio:this.precio, IdCategoria:this.idCat, Cantidad:0}
-  constructor(public productService:ProductService, private router:Router){
+  constructor(public productService:ProductService, private router:Router, private notificationService:NotificationService){
 
   }
   ngOnChanges(changes: SimpleChanges): void {
@@ -46,6 +47,7 @@ export class ProductoComponent implements OnChanges{
     }, error => {
       console.error('Error al agregar al carrito:', error);
     });
+    this.notificationService.showNotification('Producto agregado con éxito');
   }
   verMas(){
     this.router.navigate(['/producto', this.producto.IdProducto]);
