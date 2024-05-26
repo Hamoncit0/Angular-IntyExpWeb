@@ -49,10 +49,13 @@
         </div>
 
     </div>
-
-    <div class="proceder-pago" *ngIf="hay==true">
-        <h1>Pagar</h1>
-        <h4>Subtotal: {{ calculateTotal() | currency:"MXN" }}</h4>
-        <button class="btn btn-primary" routerLink="/pago">Proceder a pago</button>
+    <div class="proceder-pago">
+        <div class="info" *ngIf="hay==true">
+            <h1>Pagar</h1>
+            <h4>Subtotal: {{ calculateTotal() | currency:"MXN" }}</h4>
+        </div>
+        <div>
+            <button class="btn-lg btn btn-primary" routerLink="/pago">Proceder a pago</button>
+        </div>
     </div>
 </div>

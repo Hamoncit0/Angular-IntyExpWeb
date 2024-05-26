@@ -1,10 +1,15 @@
 
+.container{
+    width: 100%;
+}
+
 .content{
-    padding-top: 100px;
+    padding-top: 90px;
     display: flex;
+    margin: 20px;
 }
 .detalles{
-    width: 65%;
+    flex-basis: 65%;
     margin-left: 10px;
     margin-top: 20px;
     margin-bottom: 20px;
@@ -16,22 +21,16 @@
     margin-bottom: 15px;
 }
 .confirmar{
+    flex-basis: 25%;
     display:grid;
-    width: 25%;
     position: sticky;
     top:120px;
     height: fit-content;
     border: solid 1px rgb(164, 164, 164);
-    margin: 10px;
+    margin: 20px;
     margin-top: 20px;
     padding: 20px;
     border-radius: 10px;
-}
-.mostrarsubtotal{
-    padding-left: 40px;
-    padding-right: 40px;
-    display: flex;
-    justify-content: space-between;
 }
 .btn-success{
     margin-top: 5px;

@@ -1,89 +1,91 @@
-
-<div class="content">
-    <div class="detalles">
-        <div class="direccion">
-            <h3>Dirección de envío.</h3>
-            <div class="row">
-                <div class="col">
-                    <label for="nombres">Nombres:</label>
-                    <input name="nombres" type="text" class="form-control">
-                </div>
-                <div class="col">
-                    <label for="apellidos">Apellidos:</label>
-                    <input name="apellidos" type="text" class="form-control">
-                </div>
+<div class="container-fluid">
+    <div class="content row">
+      <div class="detalles col-lg-8 col-md-12 col-sm-12">
+        <div class="direccion mb-4">
+          <h3>Dirección de envío.</h3>
+          <div class="row mb-3">
+            <div class="col-md-6">
+              <label for="nombres">Nombres:</label>
+              <input name="nombres" type="text" class="form-control">
             </div>
-            <div class="row">
-                <div class="col-7">
-                    <label for="calle">Calle:</label>
-                    <input name="calle" type="text" class="form-control">
-                </div>
-                <div class="col-5">
-                    <label for="colonia">Colonia:</label>
-                    <input name="colonia" type="text" class="form-control">
-                </div>
+            <div class="col-md-6">
+              <label for="apellidos">Apellidos:</label>
+              <input name="apellidos" type="text" class="form-control">
             </div>
-            <div class="row">
-                <div class="col">
-                    <label for="municipio">Municipio:</label>
-                    <input name="municipio" type="text" class="form-control">
-                </div>
-                <div class="col">
-                    <label for="estado">Estado:</label>
-                    <input name="estado" type="text" class="form-control">
-                </div>
-                <div class="col-3">
-                    <label for="codPos">Código Postal:</label>
-                    <input name="codPos" type="text" class="form-control">
-                </div>
+          </div>
+          <div class="row mb-3">
+            <div class="col-md-7">
+              <label for="calle">Calle:</label>
+              <input name="calle" type="text" class="form-control">
             </div>
-            <br>           
+            <div class="col-md-5">
+              <label for="colonia">Colonia:</label>
+              <input name="colonia" type="text" class="form-control">
+            </div>
+          </div>
+          <div class="row mb-3">
+            <div class="col-md-4">
+              <label for="municipio">Municipio:</label>
+              <input name="municipio" type="text" class="form-control">
+            </div>
+            <div class="col-md-4">
+              <label for="estado">Estado:</label>
+              <input name="estado" type="text" class="form-control">
+            </div>
+            <div class="col-md-4">
+              <label for="codPos">Código Postal:</label>
+              <input name="codPos" type="text" class="form-control">
+            </div>
+          </div>
         </div>
         <div class="metodo-pago">
-            <h3>Seleccionar Método de Pago</h3>
-            <table class="table table-hover tarjetas">
-                <thead class="table-dark">
-                    <tr>
-                        <th>Mis tarjetas</th>
-                        <th>Nombre en la tarjeta</th>
-                        <th>Vencimiento</th>
-                    </tr>
-                </thead>
-                <tbody>
-
-                    <tr>
-                        <td><input class="form-check-input" type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked=""> Visa que termina en 6547</td>
-                        <td>Maria Cassandra Dávila Botera</td>
-                        <td>12/21</td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td><button class="btn btn-outline-primary btn-sm">+ Agregar una tarjeta</button></td>
-                    </tr>
-                </tbody>
-            </table>
-            <h4>Pagar en efectivo.</h4>
-            <p>Paga en efectivo en una tienda de conveniencia cercana.</p>
-            <button class="btn btn-primary">Proceder a pago en efectivo</button>
+          <h3>Seleccionar Método de Pago</h3>
+          <table class="table table-hover tarjetas mb-3">
+            <thead class="table-dark">
+              <tr>
+                <th>Mis tarjetas</th>
+                <th>Nombre en la tarjeta</th>
+                <th>Vencimiento</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <input class="form-check-input" type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked> Visa que termina en 6547
+                </td>
+                <td>Maria Cassandra Dávila Botera</td>
+                <td>12/21</td>
+              </tr>
+              <tr>
+                <td></td>
+                <td></td>
+                <td><button class="btn btn-outline-primary btn-sm">+ Agregar una tarjeta</button></td>
+              </tr>
+            </tbody>
+          </table>
+          <h4>Pagar en efectivo.</h4>
+          <p>Paga en efectivo en una tienda de conveniencia cercana.</p>
+          <button class="btn btn-primary mb-3">Proceder a pago en efectivo</button>
         </div>
-    </div>
-    <div class="confirmar">
+      </div>
+      <div class="confirmar col-lg-4 col-md-12 col-sm-12">
         <h3>Confirmación del pedido</h3>
-        <div class="mostrarsubtotal">
-            <h5>Productos:</h5> <h5>${{subtotal | currency:'MXN'}}</h5>
+        <div class="mostrarsubtotal mb-3 d-flex justify-content-between">
+          <h5>Productos:</h5>
+          <h5>{{ subtotal | currency: 'MXN' }}</h5>
         </div>
-        <div class="mostrarsubtotal">
-            <h5>Envío:</h5> <h5>${{envio | currency:'MXN'}}</h5>
+        <div class="mostrarsubtotal mb-3 d-flex justify-content-between">
+          <h5>Envío:</h5>
+          <h5>{{ envio | currency: 'MXN' }}</h5>
         </div>
-        <div class="line"></div>
-        <div class="mostrarsubtotal">
-            <h5>Total:</h5> <h5>{{total | currency:'MXN'}}</h5>
+        <div class="line mb-3"></div>
+        <div class="mostrarsubtotal mb-3 d-flex justify-content-between">
+          <h5>Total:</h5>
+          <h5>{{ total | currency: 'MXN' }}</h5>
         </div>
-          
-        <button class="btn btn-success" (click)="comprar()" routerLink="/pago-exitoso" >Pagar</button>
+        <button class="btn btn-success w-100" (click)="comprar()" routerLink="/pago-exitoso">Pagar</button>
+      </div>
     </div>
 </div>
-
-
 <app-footer></app-footer>
+  
