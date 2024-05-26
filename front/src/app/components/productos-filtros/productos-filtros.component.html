@@ -31,8 +31,8 @@
           <h5>Rango de Precio</h5>
           <div class="form-group">
             <label for="priceRange">Precio: {{ precioMin }} - {{ precioMax }}</label>
-            <input type="range" class="form-range" id="priceRangeMin" min="0" max="10000" [(ngModel)]="precioMin" (change)="filterProducts()">
-            <input type="range" class="form-range" id="priceRangeMax" min="0" max="10000" [(ngModel)]="precioMax" (change)="filterProducts()">
+            <input type="range" class="form-range" id="priceRangeMin" min="0" max="50000" [(ngModel)]="precioMin" (change)="filterProducts()">
+            <input type="range" class="form-range" id="priceRangeMax" min="0" max="50000" [(ngModel)]="precioMax" (change)="filterProducts()">
           </div>
         </div>
   

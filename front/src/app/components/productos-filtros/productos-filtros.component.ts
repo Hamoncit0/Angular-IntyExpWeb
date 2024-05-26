@@ -29,7 +29,7 @@ export class ProductosFiltrosComponent {
   busqueda:string = "";
   //campos para filtrar
   precioMin: number = 0;
-  precioMax: number = 10000;
+  precioMax: number = 50000;
   sortOrder: string = 'alphaAsc';
 
   //categoria seleccionada

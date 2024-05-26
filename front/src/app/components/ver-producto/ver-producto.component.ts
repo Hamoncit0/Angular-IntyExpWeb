@@ -4,6 +4,8 @@ import { CommonModule } from '@angular/common';
 import { OnInit } from '@angular/core';
 import { ProductService } from '../../service/product.service';
 import { ActivatedRoute } from '@angular/router';
+import { AutenticacionService } from '../../service/autenticacion.service';
+import { NotificationService } from '../../service/notification.service';
 
 @Component({
   selector: 'app-ver-producto',
@@ -14,7 +16,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class VerProductoComponent implements OnInit{
   producto!:Product;
-  constructor(private productService:ProductService, private route: ActivatedRoute){
+  constructor(private productService:ProductService, private route: ActivatedRoute, public authService:AutenticacionService, private notificationService:NotificationService){
 
   }
 
@@ -40,12 +42,17 @@ export class VerProductoComponent implements OnInit{
   }
 
   addToCart() {
-    // Aquí va la lógica para agregar al carrito UwU
-    console.log('Producto añadido al carrito:', this.producto);
-    this.productService.addToCart(this.producto).subscribe(response => {
+    if(this.authService.currentUser){
+      // Aquí va la lógica para agregar al carrito UwU
       console.log('Producto añadido al carrito:', this.producto);
-    }, error => {
-      console.error('Error al agregar al carrito:', error);
-    });
+      this.productService.addToCart(this.producto).subscribe(response => {
+        console.log('Producto añadido al carrito:', this.producto);
+      }, error => {
+        console.error('Error al agregar al carrito:', error);
+      });
+      this.notificationService.showNotification('Producto agregado con éxito');
+    }else{
+        this.notificationService.showNotification('Inicia sesión para porder agregar productos al carrito.');
   }
+}
 }

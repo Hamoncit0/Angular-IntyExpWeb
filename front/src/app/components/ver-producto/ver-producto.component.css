@@ -1,19 +1,19 @@
-
-.conteneder{
+/* Estilo general del contenedor */
+.container {
   padding: 40px;
   padding-top: 120px;
-  width: 80%;
+  max-width: 80%;
   margin: auto;
-  height: 100vh;
-  overflow: hidden;
 }
 
+/* Estilo de la tarjeta */
 .card {
   margin-top: 10px;
   width: 100%;
   height: fit-content;
 }
 
+/* Estilo del cuerpo de la tarjeta */
 .card-body {
   display: flex;
   flex-direction: column;
@@ -21,18 +21,22 @@
   height: 100%;
 }
 
+/* Estilo de la imagen */
 .imagen {
-  flex-grow: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 500px;
-  overflow: hidden;
-}
-
-.imagen img {
-  width: fit-content;
+  width: 100%;
   height: 100%;
   object-fit: cover;
   border-radius: 5px;
+}
+
+/* Mejorar la apariencia del botón */
+.btn-primary {
+  background-color: #007bff;
+  border-color: #007bff;
+  transition: background-color 0.3s, border-color 0.3s;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+  border-color: #004085;
 }

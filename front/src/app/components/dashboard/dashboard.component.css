@@ -72,14 +72,16 @@
     width:400px;
     justify-items: center;
     margin-top: 20px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
 }
 .onichan img{
     width: auto;
     max-height: 250px;
 }
 .onichan:hover{
-    
     cursor: pointer;
+    background-color: rgba(246, 246, 246, 0.7);
+    transform: scale(1.04);
 }
 .productitos{
     width: 80%;
