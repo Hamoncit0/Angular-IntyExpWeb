@@ -8,13 +8,20 @@ export class IntrojsService {
   introJS = null;
 
   iniciarTutorial(steps: any[]) {
-    const intro = introJs();
-    intro.setOptions({
-      steps: steps,
-      nextLabel: 'Siguiente',  
-      prevLabel: 'Anterior',   
-      doneLabel: 'Listo'       
-    });
-    intro.start();
+    const tutorialVisto = localStorage.getItem('tutorialVisto');
+    
+    if (!tutorialVisto) {
+      const intro = introJs();
+      intro.setOptions({
+        steps: steps,
+        nextLabel: 'Siguiente',
+        prevLabel: 'Anterior',
+        doneLabel: 'Listo'
+      });
+
+      intro.start()
+        localStorage.setItem('tutorialVisto', 'true');
+      
+    }
   }
 }
