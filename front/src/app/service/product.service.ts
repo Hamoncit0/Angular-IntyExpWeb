@@ -53,7 +53,6 @@ export class ProductService {
     return this.http.post<any>(`${this.url}/borrarCarrito`, {UsuarioId});
   }
 
-  //CONSEGUIR CARRITO Y SUMAR EL TOTAL Y LUEGO PASARLO
   comprar(Productos:Product[], total:number):Observable<any> {
     const UsuarioId = this.authService.currentUser?.Id_Usu;
     const Total = total;

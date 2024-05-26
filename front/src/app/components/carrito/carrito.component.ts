@@ -61,7 +61,7 @@ export class CarritoComponent implements OnInit{
       console.log('Carrito Vaciado');
       this.ngOnInit();
     }, error => {
-      console.error('Error al agregar al carrito:', error);
+      console.error('Error al vaciar al carrito:', error);
       this.ngOnInit();
     });
   }

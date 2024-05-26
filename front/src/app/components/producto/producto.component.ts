@@ -42,7 +42,6 @@ export class ProductoComponent implements OnChanges{
   
   addToCart() {
     if(this.authService.currentUser){
-        // Aquí va la lógica para agregar al carrito UwU
         console.log('Producto añadido al carrito:', this.producto);
         this.productService.addToCart(this.producto).subscribe(response => {
           console.log('Producto añadido al carrito:', this.producto);

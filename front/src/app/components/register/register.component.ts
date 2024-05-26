@@ -88,22 +88,22 @@ export class RegisterComponent {
     }
 
     if (errors['required']) {
-      return 'Password is required.';
+      return 'Ingrese una contraseña.';
     }
     if (errors['minlength']) {
-      return 'Password must be at least 6 characters long.';
+      return 'Ingrese una contraseña con mínimo 6 caracteres.';
     }
     if (errors['maxlength']) {
-      return 'Password cannot be more than 30 characters long.';
+      return 'Ingrese una contraseña con máximo 30 caracteres.';
     }
     if (!/[A-Z]/.test(this.password?.value)) {
-      return 'Password must contain at least one uppercase letter.';
+      return 'Ingrese una contraseña con mínimo una mayúscula.';
     }
     if (!/\d/.test(this.password?.value)) {
-      return 'Password must contain at least one number.';
+      return 'Ingrese una contraseña con mínimo un número.';
     }
     if (!/[!@#$%^&*(),.?":{}|<>]/.test(this.password?.value)) {
-      return 'Password must contain at least one special character.';
+      return 'Ingrese una contraseña con mínimo un caracter especial.';
     }
 
     return null;

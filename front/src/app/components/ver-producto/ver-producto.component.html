@@ -6,10 +6,10 @@
       </div>
       <div class="col-md-8">
         <div class="card-body">
-          <h5 class="card-title">{{ producto.Nombre }}</h5>
-          <p class="card-text">{{ producto.Marca }}</p>
+          <h4 class="card-title">{{ producto.Nombre }}</h4>
+          <span class="card-text">{{ producto.Marca }}</span>
           <p class="card-text"><small class="text-muted">{{ producto.Detalles }}</small></p>
-          <p class="card-text text-primary">{{ producto.Precio | currency: 'MXN' }}</p>
+          <h5 class="card-text text-primary">{{ producto.Precio | currency: 'MXN' }}</h5>
           <button class="btn btn-primary btn-lg col-md-6" (click)="addToCart()">Agregar al carrito</button>
         </div>
       </div>

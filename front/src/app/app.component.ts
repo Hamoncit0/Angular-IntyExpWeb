@@ -11,5 +11,5 @@ import { NotificationComponent } from './components/notification/notification.co
   styleUrls:[ './components/bootstrap.css','./app.component.css']
 })
 export class AppComponent {
-  title = 'front';
+  title = 'DDtech';
 }
