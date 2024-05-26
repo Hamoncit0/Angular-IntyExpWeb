@@ -1,7 +1,7 @@
 #navbar-id {
   display: inline;
-  padding: 8px;
-  max-height: 120px;
+  /* padding: 8px; */
+  max-height: 100px;
   position: sticky;
 }
 
@@ -44,6 +44,7 @@
 }
 
 .Header-left-img {
+  max-height: 100px;
   max-width: 40vh;
   max-width: 230px;
   padding-top: 15px;

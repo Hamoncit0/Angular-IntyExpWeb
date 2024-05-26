@@ -1,11 +1,17 @@
 
 .conteneder{
+  padding: 40px;
   padding-top: 120px;
+  width: 80%;
+  margin: auto;
+  height: 100vh;
+  overflow: hidden;
 }
 
 .card {
-  margin-top: 20px;
-  margin: auto;
+  margin-top: 10px;
+  width: 100%;
+  height: fit-content;
 }
 
 .card-body {
@@ -14,7 +20,18 @@
   justify-content: space-between;
 }
 
-.img-fluid {
-  max-height: 200px;
+.imagen {
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 500px;
+  overflow: hidden;
+}
+
+.imagen img {
+  width: fit-content;
+  height: 100%;
   object-fit: cover;
+  border-radius: 5px;
 }

@@ -245,6 +245,17 @@ app.post('/mostrarCarrito', (req, res) => {
 
 //////////////CATEGORIAS//////////////////
 //TODAS LAS CATEGORIAS SIN PADRE
+app.get('/categorias', (req, res) => {
+  console.log('entro a recoger categorias');
+  db.query('SELECT * FROM categorias;', (err, results) => {
+    if (err) {
+      console.error('Error fetching products:', err);
+      res.status(500).json({ error: 'Un error ha ocurrido mientras se buscaban las primeras categorias.' });
+      return;
+    }
+    res.status(200).json(results);
+  });
+});
 app.get('/categoriasPadre', (req, res) => {
   console.log('entro a recoger categorias');
   db.query('SELECT * FROM categorias WHERE IdCatParent IS NULL;', (err, results) => {

@@ -46,62 +46,17 @@
       font-size: 20px;
     }
 }
-.imagen-producto{
-    height: 250px;
-    width: 250px;
-}
 .todays-deals{
     width: 100%;
     margin: auto;
     margin-top: 30px;
     text-align: center;
 }
-.container{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-content: stretch;
-    flex-wrap: wrap;
-}
-.flex-box{
-    height: fit-content;
-    margin: 15px;
-    width: 23%;
-    min-width: 320px;
-    padding: 10px 12px;
-    text-align: left;
-    justify-items: center;
-    border: 1px solid #cccc;
-    border-radius: 5px;
-    cursor: pointer;
-    box-shadow: 20px 20px 30px rgba(0, 0, 0, 0.02);
-    transition: 0.2s ease;
-}
-.flex-box:hover{
-    box-shadow: 20px 20px 30px rgba(0,0,0,0.06);
-}
-.imagen-producto{
-    width: 100%;
-    height: auto;
-    border-radius: 5px;
-}
-.precio{
-    font-size: 20px;
-}
-.precio-desc{
-    font-size: 20px;
-    text-decoration: line-through;
-    color: #8e8e8ecc;
-}
+
 .btn{
     margin: 3px;
 }
-.badge{
-    margin: 5px;
-    font-size: large;
-}
 .card-group{
-    
     justify-content: space-evenly;
 }
 .banner{
@@ -118,13 +73,9 @@
     justify-items: center;
     margin-top: 20px;
 }
-.uwu{
+.onichan img{
     width: auto;
-    height: auto;
-    border-radius: 5px;
-    max-width: 250px;
-    margin: auto;
-    margin-bottom: 20px;
+    max-height: 250px;
 }
 .onichan:hover{
     
@@ -133,4 +84,23 @@
 .productitos{
     width: 80%;
     margin: auto;
+}
+.imagen {
+    margin: auto;
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 250px;
+    overflow: hidden;
+}
+
+.imagen img {
+    width: fit-content;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 5px;
+}
+.card-body{
+    margin-top: 10px;
 }
