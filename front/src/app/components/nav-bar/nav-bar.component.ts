@@ -5,7 +5,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { IntrojsService } from '../../service/introjs.service';
-declare var introJs: any;
+
 
 @Component({
   selector: 'app-nav-bar',

@@ -71,7 +71,7 @@
       </div>
       
     <div class="banner">
-      <h2>Te podría interesar.</h2>
+      <h1>Te podría interesar</h1>
       <div class="card-group">
         <div class="onichan" routerLink="/tendencias" >
           <img [src]="tendencia.Imagen" style="max-height: 300px;" class="card-img-top uwu" alt="...">
@@ -79,88 +79,37 @@
             <h3 class="card-title">Tendencias</h3>
           </div>
         </div>
-        <div class="onichan">
+        <div class="onichan" *ngIf="authService.currentUser">
           <img src="../../../assets/productos/producto2.png" class="card-img-top uwu" alt="...">
           <div class="card-body">
             <h3 class="card-title">Continúa Comprando</h3>
           </div>
         </div>
-        <div class="onichan">
+        <div class="onichan" *ngIf="authService.currentUser">
           <img src="../../../assets/productos/producto4.png" class="card-img-top uwu" alt="...">
           <div class="card-body">
-            <h3 class="card-title">Pensamos que te podría gustar.</h3>
+            <h3 class="card-title">Pensamos que te podría gustar</h3>
           </div>
         </div>
+        <div class="onichan" *ngIf="!authService.currentUser">
+          <img src="../../../assets/productos/producto4.png" class="card-img-top uwu" alt="...">
+          <div class="card-body">
+            <h3 class="card-title">Checa nuestras novedades</h3>
+          </div>
       </div>
     </div>
     <div class="todays-deals">
-        <h2>Descuentos del día.</h2>
-        <div class="container">
-            <div class="flex-box">
-                <span class="badge bg-success">50% de descuento</span>
-                <img src="../../../assets/productos/producto1.png" alt="" class="imagen-producto">
-                <div class="description">
-                    <span>E-ATX</span>
-                    <h4 class="nombre-producto">Gabinete Deepcool CH-780</h4>
-                    <h5 class="precio">$2,369.00 MXN</h5>
-                    <h5 class="precio-desc">$2,500.00 MXN</h5>
-                </div>
-                <button class="btn btn-primary">Agregar al carrito</button>
-                <button class="btn-sm btn btn-outline-primary">Ver más</button>
-            </div>
-            <div class="flex-box">
-                <span class="badge bg-success">50% de descuento</span>
-                <img src="../../../assets/productos/producto2.png" alt="" class="imagen-producto">
-                <div class="description">
-                    <span>XPG</span>
-                    <h4 class="nombre-producto">Laptop Gamer XPG Xenia</h4>
-                    <h5 class="precio">$32,999.00 MXN</h5>
-                    <h5 class="precio-desc">$99,999.00 MXN</h5>
-                </div>
-                <button class="btn btn-primary">Agregar al carrito</button>
-                <button class="btn-sm btn btn-outline-primary">Ver más</button>
-            </div>
-            <div class="flex-box">
-                <img src="../../../assets/productos/producto3.png" alt="" class="imagen-producto">
-                <div class="description">
-                    <span>ASUS</span>
-                    <h4 class="nombre-producto">Control Gaming ASUS ROG Raikiri Pro</h4>
-                    <h5 class="precio">$2,299.00 MXN</h5>
-                </div>
-                <button class="btn btn-primary">Agregar al carrito</button>
-                <button class="btn-sm btn btn-outline-primary">Ver más</button>
-            </div>
-            <div class="flex-box">
-                <img src="../../../assets/productos/producto4.png" alt="" class="imagen-producto">
-                <div class="description">
-                    <span>Munfrost</span>
-                    <h4 class="nombre-producto">Silla Gamer Munfrost NASH</h4>
-                    <h5 class="precio">$6,799.00 MXN</h5>
-                </div>
-                <button class="btn btn-primary">Agregar al carrito</button>
-                <button class="btn-sm btn btn-outline-primary">Ver más</button>
-            </div>
-            <div class="flex-box">
-                <img src="../../../assets/productos/producto5.png" alt="" class="imagen-producto">
-                <div class="description">
-                    <span>NVIDIA</span>
-                    <h4 class="nombre-producto">Tarjeta de Video GIGABYTE RTX 4080 Super AORUS Master 16G</h4>
-                    <h5 class="precio">$23,400.00 MXN</h5>
-                </div>
-                <button class="btn btn-primary">Agregar al carrito</button>
-                <button class="btn-sm btn btn-outline-primary">Ver más</button>
-            </div>
-            <div class="flex-box">
-                <img src="../../../assets/productos/producto6.jpg" alt="" class="imagen-producto">
-                <div class="description">
-                    <span>ASUS</span>
-                    <h4 class="nombre-producto">Monitor Asus 27" PB2770</h4>
-                    <h5 class="precio">$4,399 MXN</h5>
-                </div>
-                <button class="btn btn-primary">Agregar al carrito</button>
-                <button class="btn-sm btn btn-outline-primary">Ver más</button>
-            </div>
-            
+        <h1>Productos</h1>
+        <div class="row productitos">
+          <div *ngFor="let producto of productos" class="col-md-6 col-lg-4 mb-4">
+            <app-producto [nombre]="producto.Nombre" 
+            [descripcion]="producto.Detalles"
+            [precio]="producto.Precio" 
+            [marca]="producto.Marca" 
+            [id]="producto.IdProducto" 
+            [idCat]="producto.IdCategoria" 
+            [imagenUrl]="producto.Imagen"></app-producto>
+        </div>
         </div>
     </div>
 

@@ -6,16 +6,19 @@ import { ProductListComponent } from '../product-list/product-list.component';
 import { ProductoComponent } from '../producto/producto.component';
 import { ProductService } from '../../service/product.service';
 import { AutenticacionService } from '../../service/autenticacion.service';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [RouterOutlet, RouterLink, FooterComponent, ProductListComponent, ProductoComponent],
+  imports: [RouterOutlet, RouterLink, FooterComponent, ProductListComponent, ProductoComponent, FormsModule, CommonModule],
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
   tendencias: Product[] = [];
   tendencia!:Product;
+  productos:Product[]=[];
   constructor(private productService:ProductService, public authService:AutenticacionService){
     
   }
@@ -35,7 +38,11 @@ export class DashboardComponent implements OnInit {
       console.error('Error fetching products:', error);
     });
 
-
+    this.productService.getAllProducts().subscribe((data: Product[])=>{
+      this.productos = data;
+    }, error=>{
+      console.error('ERROR:', error);
+    })
 
   }
 }
