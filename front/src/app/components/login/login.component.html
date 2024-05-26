@@ -1,6 +1,6 @@
-<body>
+<div class="row">
     
-<div class="container card bg-body mb-3" style="max-width: 30rem;">
+<div class="container card  mb-3 col-5">
         
     <form class="formulario" [formGroup]="logInForm" (ngSubmit)="logIn()">
     
@@ -28,6 +28,7 @@
      </div>
     </form>
 </div>
-</body>
-<app-footer></app-footer>
+</div>
+
+
 <router-outlet></router-outlet>
