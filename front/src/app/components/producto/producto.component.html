@@ -10,7 +10,7 @@
         </div>
     </div>
     <div class="card-footer">
-        <button class="btn btn-primary" (click)="addToCart()">Agregar al carrito</button>
+        <button class="btn btn-primary" *ngIf="this.authService.currentUser" (click)="addToCart()">Agregar al carrito</button>
         <button class="btn btn-outline-primary" (click)="verMas()">Ver más</button>
     </div>
 </div>
