@@ -9,6 +9,7 @@ body{
 .row{
     height: calc(100vh-100px);
     margin-top: 100px;
+    width: 100%;
 }
 .container{
     margin: 8%;
