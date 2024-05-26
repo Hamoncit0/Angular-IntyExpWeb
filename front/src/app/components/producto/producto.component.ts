@@ -50,6 +50,8 @@ export class ProductoComponent implements OnChanges{
           console.error('Error al agregar al carrito:', error);
         });
         this.notificationService.showNotification('Producto agregado con éxito');
+      }else{
+          this.notificationService.showNotification('Inicia sesión para porder agregar productos al carrito.');
     }
    
   }

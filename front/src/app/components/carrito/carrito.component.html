@@ -44,13 +44,11 @@
     
         </table>
         </div>
-        <div class="nohaycarrito" *ngIf="hay==false">
-            <h6>Todavia no hay productos en el carrito.</h6>
-        </div>
+       
 
     </div>
-    <div class="proceder-pago">
-        <div class="info" *ngIf="hay==true">
+    <div class="proceder-pago" *ngIf="hay==true">
+        <div class="info" >
             <h1>Pagar</h1>
             <h4>Subtotal: {{ calculateTotal() | currency:"MXN" }}</h4>
         </div>
@@ -58,4 +56,11 @@
             <button class="btn-lg btn btn-primary" routerLink="/pago">Proceder a pago</button>
         </div>
     </div>
+</div>
+<div class="nohaycarrito" *ngIf="hay==false">
+    <div class="container text-center mt-5">
+        <h1 class="display-4">Tu carrito está vacío</h1>
+        <p class="lead">Parece que aún no has añadido productos a tu carrito.</p>
+        <a routerLink="/productosFiltros" class="btn btn-primary btn-lg mt-4">Ir a comprar</a>
+      </div>
 </div>
