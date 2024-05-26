@@ -1,28 +1,28 @@
 <div class='Header-main'>
   <nav class="navbar navbar-expand-lg bg-body-dark" id='navbar-id'>
     <div class="container-fluid" id='container-fluid-id'>
-      <a  class="navbar-brand" id='navbar-brand-id' routerLink="">
-       DDTECH
-      </a>
+      <div id="paso-1-navbar">
+        <a  class="navbar-brand" id='navbar-brand-id' routerLink="">DDTECH</a>
+      </div>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto">
-          <li class="nav-item" *ngIf="!authService.currentUser">
+          <li class="nav-item" *ngIf="!authService.currentUser" id="paso-4-navbar">
             <a class="nav-link" routerLink="/login">INICIAR SESIÓN</a>
           </li>
-          <li class="nav-item" *ngIf="!authService.currentUser">
+          <li class="nav-item" *ngIf="!authService.currentUser" id="paso-3-navbar">
             <a class="nav-link" routerLink="/register">REGISTRARSE</a>
           </li>
           <li class="nav-item dropdown">
-            <a class="nav-link" routerLink="/productosFiltros">PRODUCTOS <i class="bi bi-chevron-down"></i></a>
+            <a class="nav-link" routerLink="/productosFiltros" id="paso-2-navbar">PRODUCTOS <i class="bi bi-chevron-down"></i></a>
             <div class="dropdown-content">
               <a class="dropdown-link">Buscar</a>
               <a class="dropdown-link">Tendencias</a>
             </div>
           </li>
-          <li class="nav-item dropdown">
+          <li class="nav-item dropdown" id="paso-5-navbar">
             <a class="nav-link">ARMAR TU PC <i class="bi bi-chevron-down"></i></a>
             <div class="dropdown-content">
               <a class="dropdown-link">Servicios Administrados</a>
@@ -33,7 +33,7 @@
             <a class="nav-link">BLOG</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link">CONTACTO</a>
+            <a class="nav-link" id="paso-6-navbar">CONTACTO</a>
           </li>
           <li class="nav-item" *ngIf="authService.currentUser">
             <a class="nav-link" routerLink="/carrito"><i class="bi bi-cart"></i> CARRITO</a>
