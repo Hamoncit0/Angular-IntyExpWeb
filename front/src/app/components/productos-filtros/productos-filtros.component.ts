@@ -26,8 +26,8 @@ export class ProductosFiltrosComponent {
   categoriasNietas: Category[] = [];
   //productos filtrados
   productosFiltrados: Product[] = [];
-  busqueda:string = "";
   //campos para filtrar
+  busqueda:string = "";
   precioMin: number = 0;
   precioMax: number = 50000;
   sortOrder: string = 'alphaAsc';
