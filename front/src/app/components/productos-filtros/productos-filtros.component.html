@@ -1,0 +1,75 @@
+<div class="container mt-3 conteneder">
+    <div class="row">
+      <!-- filtros y categorias-->
+      <div class="col-md-3">
+        <!-- Categorias -->
+        <div class="list-group" #categoryList>
+            <h5 class="list-group-item list-group-item-action active">Categorías</h5>
+            <div *ngFor="let categoria of categorias">
+              <button class="list-group-item list-group-item-action" (click)="selectCategory(categoria)">
+                {{ categoria.Categoria }}
+              </button>
+              <!-- Categorías hijas -->
+              <div class="ml-3 esconder" *ngFor="let categoriaHija of categoriasHijas" [ngClass]="'category-' + categoria.IdCategoria" style="display: none;">
+                <div *ngIf="categoria.IdCategoria == categoriaHija.IdCatParent">
+                    <button class="list-group-item list-group-item-action list-group-item-secondary" [value]="categoriaHija.IdCategoria"(click)="selectCategoryHija(categoriaHija)">{{ categoriaHija.Categoria }}</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+            <!-- Categorías nietas -->
+        <div class="ml-5" *ngFor="let categoriaNieta of categoriasNietas" [ngClass]="'category-' + categoriaNieta.IdCatParent" [style.display]="categoriaNieta.IdCatParent === selectedCategoryHija?.IdCategoria ? 'block' : 'none'">
+            <div *ngIf="selectedCategoryHija?.IdCategoria === categoriaNieta.IdCatParent">
+            <input type="checkbox" [checked]="selectedCategoryNieta.includes(categoriaNieta)" (change)="selectCategoryNieta(categoriaNieta)">
+            {{ categoriaNieta.Categoria }}
+            </div>
+        </div>
+  
+        <!-- Filtro precio -->
+        <div class="mt-4">
+          <h5>Rango de Precio</h5>
+          <div class="form-group">
+            <label for="priceRange">Precio: {{ precioMin }} - {{ precioMax }}</label>
+            <input type="range" class="form-range" id="priceRangeMin" min="0" max="50000" [(ngModel)]="precioMin" (change)="filterProducts()">
+            <input type="range" class="form-range" id="priceRangeMax" min="0" max="50000" [(ngModel)]="precioMax" (change)="filterProducts()">
+          </div>
+        </div>
+  
+        <!-- Ordenar -->
+        <div class="mt-4">
+          <h5>Ordenar por</h5>
+          <select class="form-select" [(ngModel)]="sortOrder" (change)="sortProducts()">
+            <option value="alphaAsc">Alfabético (A-Z)</option>
+            <option value="alphaDesc">Alfabético (Z-A)</option>
+            <option value="priceAsc">Precio (menor a mayor)</option>
+            <option value="priceDesc">Precio (mayor a menor)</option>
+          </select>
+        </div>
+        
+        <div class="mt-4">
+            <button type="button" class="btn btn-primary" (click)="resetear()" style="margin-bottom: 10px;">Vaciar Filtros</button>
+        </div>
+      </div>
+  
+      <!-- Productos -->
+      <div class="col-md-9">
+        <div class="row" >
+          <div class="row mb-3">
+            <div class="col">
+              <input type="text" class="form-control" placeholder="Buscar productos" [(ngModel)]="busqueda" (input)="filterProducts()">
+            </div>
+          </div>
+          <div *ngFor="let producto of productosFiltrados" class="col-md-6 col-lg-4 mb-4">
+            <app-producto [nombre]="producto.Nombre" 
+            [descripcion]="producto.Detalles"
+            [precio]="producto.Precio" 
+            [marca]="producto.Marca" 
+            [id]="producto.IdProducto" 
+            [idCat]="producto.IdCategoria" 
+            [imagenUrl]="producto.Imagen"></app-producto>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

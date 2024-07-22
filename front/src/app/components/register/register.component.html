@@ -1,23 +1,64 @@
-<div class="container">
-    <form [formGroup]="userForm" (ngSubmit)="registerUser()">
-    <h1>Registro</h1>
-        <div class="input-container">
-            <label for="emailRegister">Correo:</label>
-            <input formControlName='email' type="email" id="emailRegister">
+<body>
+<div class="container card bg-body mb-3" style="max-width: 30rem;">
+        
+    <form class="formulario" [formGroup]="userForm" (ngSubmit)="registerUser()">
+        <h1 class="card-header">Regístrate</h1>
+       
+        <div class="contenedor mb-3 card-body">
+            
+           <div *ngIf="mensajeChi" class="success-message">
+            <div class="alert alert-dismissible alert-success">
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            <strong>¡Completado correctamente!</strong> {{mensajeChi}}<a routerLink="/login" class="alert-link">Iniciar Sesión</a>.
+          </div>
+          </div>
+           <div class="input-contenedor mb-3">
+            <label for="floatingName" class="form-label mt-4">Nombre(s):</label>
+            
+            <input formControlName="firstName" type="text" class="form-control" id="firstName" placeholder="Nombre" >
+            
+            <small class="text-danger" *ngIf="userForm.get('firstName')?.invalid && userForm.get('firstName')?.touched">Ingrese un nombre válido.</small>
+           </div>
+            
+           <div class="input-contenedor mb-3">
+            <label for="floatingName" class="form-label mt-4">Apellidos(s):</label>
+            
+            <input formControlName="lastName" type="text" class="form-control" id="lastName" placeholder="Apellido">
+            
+            <small class="text-danger" *ngIf="userForm.get('lastName')?.invalid && userForm.get('lastName')?.touched">Ingrese un apellido válido.</small>
+           </div>
+
+            <div class="input-contenedor mb-3">
+             <label for="floatingEmail" class="form-label mt-4">Correo Electrónico</label>
+             <input formControlName="email" type="email" class="form-control" id="floatingEmail" placeholder="name@example.com">
+             <small class="text-danger" *ngIf="userForm.get('email')?.invalid && userForm.get('email')?.touched">Ingrese un correo válido.</small>
+            </div>
+            
+            
+            <div class="input-contenedor mb-3" >
+             <label for="floatingPassword" class="form-label mt-4">Contraseña</label>
+             <input formControlName="password" [type]="hidePassword ? 'password' : 'text'" class="form-control" id="floatingPassword" placeholder="Contraseña">
+             <!-- <small class="text-danger"  *ngIf="userForm.get('password')?.invalid && userForm.get('password')?.touched">Ingrese una contraseña con mínimo 6 caracteres.</small> -->
+             <div *ngIf="password?.invalid && (password?.dirty || password?.touched)">
+                <small class="text-danger">{{ getFirstPasswordError() }}</small>
+              </div>
+             <button class="btn btn-sm" type="button" (click)="togglePasswordVisibility()">{{ hidePassword ? 'Show' : 'Hide' }} Password</button>
+           </div>
+   
+           <div class="input-contenedor mb-3">
+            <label for="FloatingDate" class="form-label mt-4">Fecha de Nacimiento</label>
+   
+            <input formControlName="birthday" type="date" class="form-control" id="FloatingDate" required
+               min="1925-01-01" max="2022-12-31" >
+               <small class="text-danger" *ngIf="userForm.get('birthday')?.invalid && userForm.get('birthday')?.touched"> Ingrese una fecha de nacimiento válida.</small>
+           </div>
+            <input type="submit" value="Registrarse" class="btn btn-primary" [disabled]="userForm.invalid">
+            <div class="undertext" style="margin-top: 5px;">
+                <p>¿Ya tienes una cuenta? <a class="link" routerLink="/login">Iniciar Sesión</a></p>
+            </div>
         </div>
-        <div class="input-container">
-            <label for="usernameRegister">Nombre de usuario:</label>
-            <input formControlName='username' type="text" id="usernameRegister">
-        </div>
-        <div class="input-container">
-            <label for="passwordRegister">Contrase;a:</label>
-            <input formControlName="password" type="password" id="passwordRegister">
-        </div>
-        <button type="submit">registrar</button>
-    </form>
-    <div class="datos">
-        <p>{{usuario.Usuario}}</p>
-        <p>{{usuario.Pass}}</p>
-        <p>{{usuario.Correo}}</p>
-    </div> 
+       </form>
 </div>
+</body>
+
+<router-outlet></router-outlet>

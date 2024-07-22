@@ -13,12 +13,10 @@ export class UserService {
   addUser(user:User){
     return this.http.post((this.url+"/users"), user)
   }
-  getUser(): Observable<User[]> {
-    return this.http.get<User[]>(`${this.url}/get-users`);
-  }
+  
 
   getUserByNameandPassword(user:User): Observable<User>{
-    const {Usuario, Pass}=user;
-    return this.http.post<User>(this.url+'/login',{Usuario, Pass})
+    const {Nombres, Apellidos, Correo, Pass, FechaNac}=user;
+    return this.http.post<User>(this.url+'/login',{Nombres, Apellidos, Correo, Pass, FechaNac})
   }
 }

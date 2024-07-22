@@ -1,0 +1,17 @@
+<div class="container">
+    <h1>Tendencias de Productos</h1>
+    <div class="col-md-12">
+      <div class="row" >
+        <div *ngFor="let producto of tendencias" class="col-md-4 mb-4">
+          <app-producto [nombre]="producto.Nombre" 
+            [descripcion]="producto.Detalles"
+            [precio]="producto.Precio" 
+            [marca]="producto.Marca" 
+            [id]="producto.IdProducto" 
+            [idCat]="producto.IdCategoria" 
+            [imagenUrl]="producto.Imagen"></app-producto>
+      </div>
+    </div>
+  </div>
+</div>
+  
